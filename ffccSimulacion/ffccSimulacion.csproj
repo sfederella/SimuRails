@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9936E94A-9CEC-46AE-BDD3-324DF777CC61}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ffccSimulacion</RootNamespace>
+    <AssemblyName>ffccSimulacion</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>%28INSTALADOR%29\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>ffccSimulacion</ProductName>
+    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5FA7246D2A1EEDF1808BE01AC4785B458A7DF82C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ffccSimulacion_ClaveTemporal.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icono.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>.\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa">
+      <HintPath>.\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xtra">
+      <HintPath>.\itextsharp.xtra.dll</HintPath>
+    </Reference>
+    <Reference Include="Meta.Numerics, Version=3.0.0.0, Culture=neutral, PublicKeyToken=67d25c65a6631347, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Meta.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Entities\Coches.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\DBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\DBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\DBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Estaciones.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Estaciones_X_Incidentes.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Formaciones.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Formaciones_X_Coches.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Incidentes.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Relaciones.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\ResultadoServicio.cs" />
+    <Compile Include="Model\Entities\Coches.partial.cs" />
+    <Compile Include="Model\Entities\Estaciones.partial.cs" />
+    <Compile Include="Model\Entities\Formaciones.partial.cs" />
+    <Compile Include="Model\Entities\Formaciones_X_Coches.partial.cs" />
+    <Compile Include="Model\Entities\Incidentes.partial.cs" />
+    <Compile Include="Model\Entities\Relaciones.partial.cs" />
+    <Compile Include="Model\Entities\Servicios.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Servicios.partial.cs" />
+    <Compile Include="Model\Entities\Servicios_X_Formaciones.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Simulaciones.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Simulaciones.partial.cs" />
+    <Compile Include="Model\Entities\Trazas.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Entities\Trazas.partial.cs" />
+    <Compile Include="Model\Entities\Trazas_X_Servicios.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Coche\frmABMCoche.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Coche\frmABMCoche.Designer.cs">
+      <DependentUpon>frmABMCoche.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABMFormacion\frmABMFormacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMFormacion\frmABMFormacion.Designer.cs">
+      <DependentUpon>frmABMFormacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABMServicio\frmProgramacionServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMServicio\frmProgramacionServicio.Designer.cs">
+      <DependentUpon>frmProgramacionServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ayuda\frmAyuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Ayuda\frmAyuda.Designer.cs">
+      <DependentUpon>frmAyuda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Estacion\frmABMEstacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Estacion\frmABMEstacion.Designer.cs">
+      <DependentUpon>frmABMEstacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Escritorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Escritorio.Designer.cs">
+      <DependentUpon>Escritorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABMIncidente\frmABMIncidente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMIncidente\frmABMIncidente.Designer.cs">
+      <DependentUpon>frmABMIncidente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataBase\Context.cs" />
+    <Compile Include="Model\Simulacion\Enumeraciones.cs" />
+    <Compile Include="Model\Simulacion\Fdp.cs" />
+    <Compile Include="Model\Simulacion\Structs.cs" />
+    <Compile Include="Model\Simulacion\TiempoComprometido.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\ABMServicio\frmABMServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMServicio\frmABMServicio.Designer.cs">
+      <DependentUpon>frmABMServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Resultados\frmResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Resultados\frmResultados.Designer.cs">
+      <DependentUpon>frmResultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Simulacion\Informe.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="UI\ABMSimulacion\frmBarraProgreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMSimulacion\frmBarraProgreso.Designer.cs">
+      <DependentUpon>frmBarraProgreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABMSimulacion\frmBuscarSimulacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMSimulacion\frmBuscarSimulacion.Designer.cs">
+      <DependentUpon>frmBuscarSimulacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABMSimulacion\frmRealizarSimulacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMSimulacion\frmRealizarSimulacion.Designer.cs">
+      <DependentUpon>frmRealizarSimulacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABMTraza\frmABMTraza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABMTraza\frmABMTraza.Designer.cs">
+      <DependentUpon>frmABMTraza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
+    <EmbeddedResource Include="UI\Coche\frmABMCoche.resx">
+      <DependentUpon>frmABMCoche.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Estacion\frmABMEstacion.resx">
+      <DependentUpon>frmABMEstacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMFormacion\frmABMFormacion.resx">
+      <DependentUpon>frmABMFormacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMIncidente\frmABMIncidente.resx">
+      <DependentUpon>frmABMIncidente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMServicio\frmProgramacionServicio.resx">
+      <DependentUpon>frmProgramacionServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ayuda\frmAyuda.resx">
+      <DependentUpon>frmAyuda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Escritorio.resx">
+      <DependentUpon>Escritorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMServicio\frmABMServicio.resx">
+      <DependentUpon>frmABMServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Resultados\frmResultados.resx">
+      <DependentUpon>frmResultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMSimulacion\frmBarraProgreso.resx">
+      <DependentUpon>frmBarraProgreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMSimulacion\frmBuscarSimulacion.resx">
+      <DependentUpon>frmBuscarSimulacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMSimulacion\frmRealizarSimulacion.resx">
+      <DependentUpon>frmRealizarSimulacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABMTraza\frmABMTraza.resx">
+      <DependentUpon>frmABMTraza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="Model\Entities\DBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\Entities\DBModel.edmx.diagram">
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\bin-icon_1488050992.jpg" />
+    <None Include="Resources\icono.flecha.derecha.png" />
+    <None Include="Resources\icono.flecha.izquierda.png" />
+    <Content Include="Model\Entities\DBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\Entities\DBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Resources\Manual.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\formacion.png" />
+    <Content Include="icono.ico" />
+    <Content Include="Resources\iconoEstacion.png" />
+    <Content Include="Resources\iconoIncidente.png" />
+    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\tren-nuevo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SqlServer.Express.11.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2012 Express</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
