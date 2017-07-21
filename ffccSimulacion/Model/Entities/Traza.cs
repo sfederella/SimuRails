@@ -7,26 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Formaciones
+    public partial class Traza
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Formaciones()
+        public Traza()
         {
-            this.Formaciones_X_Coches = new HashSet<Formaciones_X_Coches>();
-            this.Servicios_X_Formaciones = new HashSet<Servicios_X_Formaciones>();
+            this.Simulacion = new HashSet<Simulacion>();
+            this.Traza_X_Servicio = new HashSet<Traza_X_Servicio>();
         }
     
         public int Id { get; set; }
-        public string NombreFormacion { get; set; }
+        public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Formaciones_X_Coches> Formaciones_X_Coches { get; set; }
+        public virtual ICollection<Simulacion> Simulacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Servicios_X_Formaciones> Servicios_X_Formaciones { get; set; }
+        public virtual ICollection<Traza_X_Servicio> Traza_X_Servicio { get; set; }
     }
 }

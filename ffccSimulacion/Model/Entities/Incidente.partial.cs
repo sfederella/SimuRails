@@ -1,4 +1,4 @@
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;

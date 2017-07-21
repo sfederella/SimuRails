@@ -5,11 +5,11 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using ffccSimulacion.Model.Entities;
+using SimuRails.Model.Entities;
 using System.Collections.Generic;
 using iTextSharp.text.pdf.draw;
 
-namespace ffccSimulacion.Model.Simulacion
+namespace SimuRails.Model.Simulacion
 {
     public class Informe
     {
@@ -58,7 +58,7 @@ namespace ffccSimulacion.Model.Simulacion
             string escenarioStr;
             char[] charToTrim = { ' ', ',', ')', '.' };
 
-            ffccSimulacionEntities context = new ffccSimulacionEntities();
+            SimuRailsEntities context = new SimuRailsEntities();
 
             escenarioStr = context.Trazas.Where(x => x.Id == idTraza).FirstOrDefault().Nombre;
             doc.Add(new Paragraph("Escenario de Simulación\n", FontFactory.GetFont("ARIAL", 13, iTextSharp.text.Font.BOLD)));

@@ -7,8 +7,8 @@
     <ProjectGuid>{9936E94A-9CEC-46AE-BDD3-324DF777CC61}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ffccSimulacion</RootNamespace>
-    <AssemblyName>ffccSimulacion</AssemblyName>
+    <RootNamespace>SimuRails</RootNamespace>
+    <AssemblyName>SimuRails</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -108,67 +108,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Entities\Coches.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\DBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\DBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\DBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Estaciones.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Estaciones_X_Incidentes.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Formaciones.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Formaciones_X_Coches.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Incidentes.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Relaciones.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Entities\ResultadoServicio.cs" />
-    <Compile Include="Model\Entities\Coches.partial.cs" />
-    <Compile Include="Model\Entities\Estaciones.partial.cs" />
-    <Compile Include="Model\Entities\Formaciones.partial.cs" />
-    <Compile Include="Model\Entities\Formaciones_X_Coches.partial.cs" />
-    <Compile Include="Model\Entities\Incidentes.partial.cs" />
-    <Compile Include="Model\Entities\Relaciones.partial.cs" />
-    <Compile Include="Model\Entities\Servicios.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Servicios.partial.cs" />
-    <Compile Include="Model\Entities\Servicios_X_Formaciones.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Simulaciones.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Simulaciones.partial.cs" />
-    <Compile Include="Model\Entities\Trazas.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities\Trazas.partial.cs" />
-    <Compile Include="Model\Entities\Trazas_X_Servicios.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model\Entities\Coche.partial.cs" />
+    <Compile Include="Model\Entities\Estacion.partial.cs" />
+    <Compile Include="Model\Entities\Formacion.partial.cs" />
+    <Compile Include="Model\Entities\Formacion_X_Coche.partial.cs" />
+    <Compile Include="Model\Entities\Incidente.partial.cs" />
+    <Compile Include="Model\Entities\Tramo.partial.cs" />
+    <Compile Include="Model\Entities\Servicio.partial.cs" />
+    <Compile Include="Model\Entities\Simulacion.partial.cs" />
+    <Compile Include="Model\Entities\Traza.partial.cs" />
     <Compile Include="UI\Coche\frmABMCoche.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,13 +255,6 @@
     <EmbeddedResource Include="UI\ABMTraza\frmABMTraza.resx">
       <DependentUpon>frmABMTraza.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\Entities\DBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\Entities\DBModel.edmx.diagram">
-      <DependentUpon>DBModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -326,16 +268,6 @@
     <None Include="Resources\bin-icon_1488050992.jpg" />
     <None Include="Resources\icono.flecha.derecha.png" />
     <None Include="Resources\icono.flecha.izquierda.png" />
-    <Content Include="Model\Entities\DBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\Entities\DBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Resources\Manual.pdf" />
   </ItemGroup>
   <ItemGroup>

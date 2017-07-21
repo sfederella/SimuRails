@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMServicio
+﻿namespace SimuRails.UI.ABMServicio
 {
     partial class frmABMServicio
     {
@@ -866,7 +866,7 @@
             // 
             // btnBorrarServicio
             // 
-            this.btnBorrarServicio.Image = global::ffccSimulacion.Properties.Resources.bin_icon_1488050992;
+            this.btnBorrarServicio.Image = global::SimuRails.Properties.Resources.bin_icon_1488050992;
             this.btnBorrarServicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBorrarServicio.Location = new System.Drawing.Point(189, 73);
             this.btnBorrarServicio.Name = "btnBorrarServicio";

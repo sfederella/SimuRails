@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.Resultados
+﻿namespace SimuRails.UI.Resultados
 {
     partial class frmResultados
     {

@@ -4,31 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9620343b5dd94a81ac9e252fd37d2264" Name="Diagram1">
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Coches" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Estaciones" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Estaciones_X_Incidentes" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Formaciones" Width="1.5" PointX="3.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Formaciones_X_Coches" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Incidentes" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Relaciones" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Servicios" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Servicios_X_Formaciones" Width="1.5" PointX="6" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Simulaciones" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Trazas" Width="1.5" PointX="3.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ffccSimulacion.Model.Entities.Trazas_X_Servicios" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Formaciones_X_Coches__Coche" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Estaciones_X_Incidentes__Estaciones" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Relacion_Estacion_Anterior" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Relacion_Estacion_Siguiente" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Estaciones_X_Incidentes__Incidentes" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Formaciones_X_Coches__Formaciones" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Servicios_X_Formaciones__Formacion" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Relacion_Servicio" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Servicios_X_Formaciones__Servicio" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Trazas_X_Servicios__Servicio" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Simulacion_Traza" ManuallyRouted="false" />
-        <AssociationConnector Association="ffccSimulacion.Model.Entities.FK_Trazas_X_Servicios__Traza" ManuallyRouted="false" />
+      <Diagram DiagramId="2ffbd6bdc2aa43c98f273cefc52fe603" Name="Diagram1">
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Coche" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Estacion" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Estacion_X_Incidente" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Formacion" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Formacion_X_Coche" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Incidente" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Servicio" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Servicio_X_Formacion" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Simulacion" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Tramo" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Traza" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Traza_X_Servicio" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Formaciones_X_Coches__Coche" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Estaciones_X_Incidentes__Estaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Servicio_Estacion" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Tramo_Estacion" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Tramo_Estacion1" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Estaciones_X_Incidentes__Incidentes" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Formaciones_X_Coches__Formaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Servicios_X_Formaciones__Formacion" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Servicios_X_Formaciones__Servicio" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Tramo_Servicio" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Trazas_X_Servicios__Servicio" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Simulacion_Traza" ManuallyRouted="false" />
+        <AssociationConnector Association="SimuRails.Model.Entities.FK_Trazas_X_Servicios__Traza" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

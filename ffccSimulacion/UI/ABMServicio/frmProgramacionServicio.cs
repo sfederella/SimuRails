@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace ffccSimulacion.UI.ABMServicio
+namespace SimuRails.UI.ABMServicio
 {
     public partial class frmProgramacionServicio : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMTraza
+﻿namespace SimuRails.UI.ABMTraza
 {
     partial class frmABMTraza
     {
@@ -497,7 +497,7 @@
             // 
             // btnTraElBorrarTraza
             // 
-            this.btnTraElBorrarTraza.Image = global::ffccSimulacion.Properties.Resources.bin_icon_1488050992;
+            this.btnTraElBorrarTraza.Image = global::SimuRails.Properties.Resources.bin_icon_1488050992;
             this.btnTraElBorrarTraza.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTraElBorrarTraza.Location = new System.Drawing.Point(185, 70);
             this.btnTraElBorrarTraza.Name = "btnTraElBorrarTraza";

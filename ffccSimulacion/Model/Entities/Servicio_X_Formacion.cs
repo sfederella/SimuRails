@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Formaciones_X_Coches
+    public partial class Servicio_X_Formacion
     {
         public int Id { get; set; }
+        public int Id_Servicio { get; set; }
         public int Id_Formacion { get; set; }
-        public int Id_Coche { get; set; }
-        public int VecesRepetido { get; set; }
+        public Nullable<int> CantFormaciones { get; set; }
     
-        public virtual Coches Coches { get; set; }
-        public virtual Formaciones Formaciones { get; set; }
+        public virtual Formacion Formacion { get; set; }
+        public virtual Servicio Servicio { get; set; }
     }
 }

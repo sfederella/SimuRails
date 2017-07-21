@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ffccSimulacion.Model.Entities;
+using SimuRails.Model.Entities;
 
-namespace ffccSimulacion.UI.ABMIncidente
+namespace SimuRails.UI.ABMIncidente
 {
     public partial class frmABMIncidente : Form
     {
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
 
         Incidentes incidenteSeleccionado;
 
@@ -22,7 +22,7 @@ namespace ffccSimulacion.UI.ABMIncidente
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
             
             cargarIncidentes();
 

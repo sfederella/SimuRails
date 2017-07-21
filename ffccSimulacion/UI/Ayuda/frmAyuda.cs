@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace ffccSimulacion.UI.Ayuda
+namespace SimuRails.UI.Ayuda
 {
     public partial class frmAyuda : Form
     {

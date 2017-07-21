@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ffccSimulacion.Model.Entities;
-using ffccSimulacion.UI.ABMSimulacion;
+using SimuRails.Model.Entities;
+using SimuRails.UI.ABMSimulacion;
 
-namespace ffccSimulacion.Model.Simulacion
+namespace SimuRails.Model.Simulacion
 {
     public class TiempoComprometido
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ffccSimulacion.Model.Simulacion
+namespace SimuRails.Model.Simulacion
 {
     public enum TipoConsumo
     {

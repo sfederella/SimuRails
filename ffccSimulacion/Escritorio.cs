@@ -7,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ffccSimulacion.UI.ABMCoche;
-using ffccSimulacion.UI.ABMEstacion;
-using ffccSimulacion.UI.ABMFormacion;
-using ffccSimulacion.UI.ABMIncidente;
-using ffccSimulacion.UI.ABMServicio;
-using ffccSimulacion.UI.ABMTraza;
-using ffccSimulacion.UI.ABMSimulacion;
-using ffccSimulacion.UI.Ayuda;
+using SimuRails.UI.ABMCoche;
+using SimuRails.UI.ABMEstacion;
+using SimuRails.UI.ABMFormacion;
+using SimuRails.UI.ABMIncidente;
+using SimuRails.UI.ABMServicio;
+using SimuRails.UI.ABMTraza;
+using SimuRails.UI.ABMSimulacion;
+using SimuRails.UI.Ayuda;
 
-namespace ffccSimulacion
+namespace SimuRails
 {
     public partial class Escritorio : Form
     {

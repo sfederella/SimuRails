@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion
+﻿namespace SimuRails
 {
     partial class Escritorio
     {

@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMServicio
+﻿namespace SimuRails.UI.ABMServicio
 {
     partial class frmProgramacionServicio
     {

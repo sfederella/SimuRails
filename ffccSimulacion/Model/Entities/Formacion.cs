@@ -7,30 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Coches
+    public partial class Formacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Coches()
+        public Formacion()
         {
-            this.Formaciones_X_Coches = new HashSet<Formaciones_X_Coches>();
+            this.Formacion_X_Coche = new HashSet<Formacion_X_Coche>();
+            this.Servicio_X_Formacion = new HashSet<Servicio_X_Formacion>();
         }
     
         public int Id { get; set; }
-        public string Modelo { get; set; }
-        public Nullable<int> EsLocomotora { get; set; }
-        public Nullable<int> TipoConsumo { get; set; }
-        public Nullable<int> ConsumoMovimiento { get; set; }
-        public Nullable<int> ConsumoParado { get; set; }
-        public int CantidadAsientos { get; set; }
-        public int MaximoLegalPasajeros { get; set; }
-        public int CapacidadMaximaPasajeros { get; set; }
+        public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Formaciones_X_Coches> Formaciones_X_Coches { get; set; }
+        public virtual ICollection<Formacion_X_Coche> Formacion_X_Coche { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Servicio_X_Formacion> Servicio_X_Formacion { get; set; }
     }
 }

@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ffccSimulacionEntities : DbContext
+    public partial class SimuRailsEntities : DbContext
     {
-        public ffccSimulacionEntities()
-            : base("name=ffccSimulacionEntities")
+        public SimuRailsEntities()
+            : base("name=SimuRailsEntities")
         {
         }
     
@@ -25,17 +25,17 @@ namespace ffccSimulacion.Model.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Coches> Coches { get; set; }
-        public virtual DbSet<Estaciones> Estaciones { get; set; }
-        public virtual DbSet<Estaciones_X_Incidentes> Estaciones_X_Incidentes { get; set; }
-        public virtual DbSet<Formaciones> Formaciones { get; set; }
-        public virtual DbSet<Formaciones_X_Coches> Formaciones_X_Coches { get; set; }
-        public virtual DbSet<Incidentes> Incidentes { get; set; }
-        public virtual DbSet<Relaciones> Relaciones { get; set; }
-        public virtual DbSet<Servicios> Servicios { get; set; }
-        public virtual DbSet<Servicios_X_Formaciones> Servicios_X_Formaciones { get; set; }
-        public virtual DbSet<Simulaciones> Simulaciones { get; set; }
-        public virtual DbSet<Trazas> Trazas { get; set; }
-        public virtual DbSet<Trazas_X_Servicios> Trazas_X_Servicios { get; set; }
+        public virtual DbSet<Coche> Coche { get; set; }
+        public virtual DbSet<Estacion> Estacion { get; set; }
+        public virtual DbSet<Estacion_X_Incidente> Estacion_X_Incidente { get; set; }
+        public virtual DbSet<Formacion> Formacion { get; set; }
+        public virtual DbSet<Formacion_X_Coche> Formacion_X_Coche { get; set; }
+        public virtual DbSet<Incidente> Incidente { get; set; }
+        public virtual DbSet<Servicio> Servicio { get; set; }
+        public virtual DbSet<Servicio_X_Formacion> Servicio_X_Formacion { get; set; }
+        public virtual DbSet<Simulacion> Simulacion { get; set; }
+        public virtual DbSet<Tramo> Tramo { get; set; }
+        public virtual DbSet<Traza> Traza { get; set; }
+        public virtual DbSet<Traza_X_Servicio> Traza_X_Servicio { get; set; }
     }
 }

@@ -3,16 +3,16 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using ffccSimulacion.Model.Entities;
-using ffccSimulacion.Model.Simulacion;
-using ffccSimulacion.UI.Resultados;
+using SimuRails.Model.Entities;
+using SimuRails.Model.Simulacion;
+using SimuRails.UI.Resultados;
 
-namespace ffccSimulacion.UI.ABMSimulacion
+namespace SimuRails.UI.ABMSimulacion
 {
     public partial class frmRealizarSimulacion : Form
     {
 
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
 
         private Simulaciones simulacion;
 
@@ -22,7 +22,7 @@ namespace ffccSimulacion.UI.ABMSimulacion
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
 
             buscarTrazasDisponibles();
 

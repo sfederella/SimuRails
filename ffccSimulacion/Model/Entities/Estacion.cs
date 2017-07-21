@@ -7,19 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Estaciones
+    public partial class Estacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Estaciones()
+        public Estacion()
         {
-            this.Estaciones_X_Incidentes = new HashSet<Estaciones_X_Incidentes>();
-            this.Relaciones = new HashSet<Relaciones>();
-            this.Relaciones1 = new HashSet<Relaciones>();
+            this.Estacion_X_Incidente = new HashSet<Estacion_X_Incidente>();
+            this.Servicio = new HashSet<Servicio>();
+            this.Tramo = new HashSet<Tramo>();
+            this.Tramo1 = new HashSet<Tramo>();
         }
     
         public int Id { get; set; }
@@ -29,10 +30,12 @@ namespace ffccSimulacion.Model.Entities
         public int TipoFDP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Estaciones_X_Incidentes> Estaciones_X_Incidentes { get; set; }
+        public virtual ICollection<Estacion_X_Incidente> Estacion_X_Incidente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Relaciones> Relaciones { get; set; }
+        public virtual ICollection<Servicio> Servicio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Relaciones> Relaciones1 { get; set; }
+        public virtual ICollection<Tramo> Tramo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tramo> Tramo1 { get; set; }
     }
 }

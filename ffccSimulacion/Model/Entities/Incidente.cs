@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Incidentes
+    public partial class Incidente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Incidentes()
+        public Incidente()
         {
-            this.Estaciones_X_Incidentes = new HashSet<Estaciones_X_Incidentes>();
+            this.Estacion_X_Incidente = new HashSet<Estacion_X_Incidente>();
         }
     
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace ffccSimulacion.Model.Entities
         public int TiempoDemora { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Estaciones_X_Incidentes> Estaciones_X_Incidentes { get; set; }
+        public virtual ICollection<Estacion_X_Incidente> Estacion_X_Incidente { get; set; }
     }
 }

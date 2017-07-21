@@ -1,11 +1,11 @@
-﻿using ffccSimulacion.Model.Simulacion;
+﻿using SimuRails.Model.Simulacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     public class ResultadoServicio
     {

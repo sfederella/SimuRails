@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Relaciones
+    public partial class Tramo
     {
         public int Id { get; set; }
         public int Id_Estacion_Anterior { get; set; }
         public int Id_Estacion_Siguiente { get; set; }
         public int Id_Servicio { get; set; }
         public int Distancia { get; set; }
+        public int VelocidadPromedio { get; set; }
         public int TiempoViaje { get; set; }
-        public int Est_Sig_Es_Parada { get; set; }
+        public bool EstSigEsParada { get; set; }
     
-        public virtual Estaciones Estaciones { get; set; }
-        public virtual Estaciones Estaciones1 { get; set; }
-        public virtual Servicios Servicios { get; set; }
+        public virtual Estacion Estacion { get; set; }
+        public virtual Estacion Estacion1 { get; set; }
+        public virtual Servicio Servicio { get; set; }
     }
 }

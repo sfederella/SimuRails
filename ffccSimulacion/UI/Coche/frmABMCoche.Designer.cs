@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMCoche
+﻿namespace SimuRails.UI.ABMCoche
 {
     partial class frmABMCoche
     {
@@ -786,7 +786,7 @@
             // 
             // btnBorrarCoche
             // 
-            this.btnBorrarCoche.Image = global::ffccSimulacion.Properties.Resources.bin_icon_1488050992;
+            this.btnBorrarCoche.Image = global::SimuRails.Properties.Resources.bin_icon_1488050992;
             this.btnBorrarCoche.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBorrarCoche.Location = new System.Drawing.Point(176, 95);
             this.btnBorrarCoche.Name = "btnBorrarCoche";

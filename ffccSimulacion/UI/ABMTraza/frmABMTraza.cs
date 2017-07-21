@@ -2,14 +2,14 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ffccSimulacion.UI.ABMServicio;
-using ffccSimulacion.Model.Entities;
+using SimuRails.UI.ABMServicio;
+using SimuRails.Model.Entities;
 
-namespace ffccSimulacion.UI.ABMTraza
+namespace SimuRails.UI.ABMTraza
 {
     public partial class frmABMTraza : Form
     {
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
 
         Trazas trazaSeleccionada;
 
@@ -17,7 +17,7 @@ namespace ffccSimulacion.UI.ABMTraza
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
 
             clbTraCreServicios.DisplayMember = "Nombre";
 

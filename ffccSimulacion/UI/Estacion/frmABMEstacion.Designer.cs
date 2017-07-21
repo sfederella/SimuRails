@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMEstacion
+﻿namespace SimuRails.UI.ABMEstacion
 {
     partial class frmABMEstacion
     {
@@ -622,7 +622,7 @@
             // 
             // btnEstBorrar
             // 
-            this.btnEstBorrar.Image = global::ffccSimulacion.Properties.Resources.bin_icon_1488050992;
+            this.btnEstBorrar.Image = global::SimuRails.Properties.Resources.bin_icon_1488050992;
             this.btnEstBorrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEstBorrar.Location = new System.Drawing.Point(151, 78);
             this.btnEstBorrar.Name = "btnEstBorrar";

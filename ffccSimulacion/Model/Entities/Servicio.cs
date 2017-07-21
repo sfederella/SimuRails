@@ -7,30 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Servicios
+    public partial class Servicio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Servicios()
+        public Servicio()
         {
-            this.Relaciones = new HashSet<Relaciones>();
-            this.Servicios_X_Formaciones = new HashSet<Servicios_X_Formaciones>();
-            this.Trazas_X_Servicios = new HashSet<Trazas_X_Servicios>();
+            this.Servicio_X_Formacion = new HashSet<Servicio_X_Formacion>();
+            this.Tramo = new HashSet<Tramo>();
+            this.Traza_X_Servicio = new HashSet<Traza_X_Servicio>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string ProgramacionStr { get; set; }
+        public Nullable<int> Id_Estacion_Mantenimiento { get; set; }
     
+        public virtual Estacion Estacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Relaciones> Relaciones { get; set; }
+        public virtual ICollection<Servicio_X_Formacion> Servicio_X_Formacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Servicios_X_Formaciones> Servicios_X_Formaciones { get; set; }
+        public virtual ICollection<Tramo> Tramo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trazas_X_Servicios> Trazas_X_Servicios { get; set; }
+        public virtual ICollection<Traza_X_Servicio> Traza_X_Servicio { get; set; }
     }
 }

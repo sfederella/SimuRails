@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using ffccSimulacion.Model.Entities;
+using SimuRails.Model.Entities;
 
-namespace ffccSimulacion
+namespace SimuRails
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace ffccSimulacion
         [STAThread]
         static void Main()
         {
-            ffccSimulacionEntities testDb = new ffccSimulacionEntities();
+            SimuRailsEntities testDb = new SimuRailsEntities();
 
             //Console.WriteLine(c.SetCoche(new Coches { Modelo = "pepito", CantidadAsientos = 100, MaximoLegalPasajeros = 100, CapacidadMaximaPasajeros = 212 }));
             //c.GetAllCoches().ForEach(x => Console.WriteLine(x.Modelo));

@@ -1,8 +1,8 @@
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System.Collections.Generic;
     using System.Linq;
-    using ffccSimulacion.Model.Simulacion;
+    using SimuRails.Model.Simulacion;
 
     public partial class Estaciones
     {

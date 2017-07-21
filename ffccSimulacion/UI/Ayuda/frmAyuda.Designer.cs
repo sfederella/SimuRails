@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.Ayuda
+﻿namespace SimuRails.UI.Ayuda
 {
     partial class frmAyuda
     {

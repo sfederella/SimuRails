@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ffccSimulacion.Model.Entities;
-using ffccSimulacion.UI.ABMIncidente;
+using SimuRails.Model.Entities;
+using SimuRails.UI.ABMIncidente;
 
-namespace ffccSimulacion.UI.ABMEstacion
+namespace SimuRails.UI.ABMEstacion
 {
     public partial class frmABMEstacion : Form
     {
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
 
         Estaciones estacionSeleccionada;
 
@@ -18,7 +18,7 @@ namespace ffccSimulacion.UI.ABMEstacion
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
 
             clbIncidentes.DisplayMember = "Nombre";
 

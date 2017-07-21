@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMFormacion
+﻿namespace SimuRails.UI.ABMFormacion
 {
     partial class frmABMFormacion
     {
@@ -160,7 +160,7 @@
             // 
             // btnAgregarFormacion
             // 
-            this.btnAgregarFormacion.Image = global::ffccSimulacion.Properties.Resources.icono_flecha_derecha;
+            this.btnAgregarFormacion.Image = global::SimuRails.Properties.Resources.icono_flecha_derecha;
             this.btnAgregarFormacion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregarFormacion.Location = new System.Drawing.Point(68, 90);
             this.btnAgregarFormacion.Name = "btnAgregarFormacion";
@@ -173,7 +173,7 @@
             // 
             // btnBorrarCocheFormacion
             // 
-            this.btnBorrarCocheFormacion.Image = global::ffccSimulacion.Properties.Resources.icono_flecha_izquierda;
+            this.btnBorrarCocheFormacion.Image = global::SimuRails.Properties.Resources.icono_flecha_izquierda;
             this.btnBorrarCocheFormacion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBorrarCocheFormacion.Location = new System.Drawing.Point(68, 156);
             this.btnBorrarCocheFormacion.Name = "btnBorrarCocheFormacion";
@@ -490,7 +490,7 @@
             // 
             // btnAgregarCocheMod
             // 
-            this.btnAgregarCocheMod.Image = global::ffccSimulacion.Properties.Resources.icono_flecha_derecha;
+            this.btnAgregarCocheMod.Image = global::SimuRails.Properties.Resources.icono_flecha_derecha;
             this.btnAgregarCocheMod.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregarCocheMod.Location = new System.Drawing.Point(28, 70);
             this.btnAgregarCocheMod.Name = "btnAgregarCocheMod";
@@ -503,7 +503,7 @@
             // 
             // btnEliminarCocheMod
             // 
-            this.btnEliminarCocheMod.Image = global::ffccSimulacion.Properties.Resources.icono_flecha_izquierda;
+            this.btnEliminarCocheMod.Image = global::SimuRails.Properties.Resources.icono_flecha_izquierda;
             this.btnEliminarCocheMod.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminarCocheMod.Location = new System.Drawing.Point(28, 121);
             this.btnEliminarCocheMod.Name = "btnEliminarCocheMod";
@@ -818,7 +818,7 @@
             // 
             // btnBorrarFormacion
             // 
-            this.btnBorrarFormacion.Image = global::ffccSimulacion.Properties.Resources.bin_icon_1488050992;
+            this.btnBorrarFormacion.Image = global::SimuRails.Properties.Resources.bin_icon_1488050992;
             this.btnBorrarFormacion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBorrarFormacion.Location = new System.Drawing.Point(191, 72);
             this.btnBorrarFormacion.Name = "btnBorrarFormacion";

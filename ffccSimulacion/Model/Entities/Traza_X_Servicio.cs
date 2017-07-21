@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ffccSimulacion.Model.Entities
+namespace SimuRails.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Trazas_X_Servicios
+    public partial class Traza_X_Servicio
     {
         public int Id { get; set; }
         public int Id_Servicio { get; set; }
         public int Id_Traza { get; set; }
     
-        public virtual Servicios Servicios { get; set; }
-        public virtual Trazas Trazas { get; set; }
+        public virtual Servicio Servicio { get; set; }
+        public virtual Traza Traza { get; set; }
     }
 }

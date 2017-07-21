@@ -2,7 +2,7 @@
 using Meta.Numerics.Statistics.Distributions;
 using Meta.Numerics.Functions;
 
-namespace ffccSimulacion.Model.Simulacion
+namespace SimuRails.Model.Simulacion
 {
     public class Fdp
     {

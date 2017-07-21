@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using ffccSimulacion.Model.Simulacion;
+using SimuRails.Model.Simulacion;
 
-namespace ffccSimulacion.UI.Resultados
+namespace SimuRails.UI.Resultados
 {
     public partial class frmResultados : Form
     {

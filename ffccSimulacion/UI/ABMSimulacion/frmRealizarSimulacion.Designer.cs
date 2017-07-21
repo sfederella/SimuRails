@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMSimulacion
+﻿namespace SimuRails.UI.ABMSimulacion
 {
     partial class frmRealizarSimulacion
     {

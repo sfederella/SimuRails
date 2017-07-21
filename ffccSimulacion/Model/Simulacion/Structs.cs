@@ -1,8 +1,8 @@
 ﻿using System;
-using ffccSimulacion.Model.Entities;
+using SimuRails.Model.Entities;
 using System.Collections.Generic;
 
-namespace ffccSimulacion.Model.Simulacion
+namespace SimuRails.Model.Simulacion
 {
     public struct Parada
     {

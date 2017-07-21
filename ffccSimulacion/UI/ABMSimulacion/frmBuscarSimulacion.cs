@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ffccSimulacion.Model.Entities;
+using SimuRails.Model.Entities;
 
-namespace ffccSimulacion.UI.ABMSimulacion
+namespace SimuRails.UI.ABMSimulacion
 {
     public partial class frmBuscarSimulacion : Form
     {
 
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
 
         public Simulaciones simulacionSeleccionada;
 
@@ -22,7 +22,7 @@ namespace ffccSimulacion.UI.ABMSimulacion
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
 
             buscarSimulacionesDisponibles();
         }

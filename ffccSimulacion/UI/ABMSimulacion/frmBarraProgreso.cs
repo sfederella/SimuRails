@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ffccSimulacion.UI.ABMSimulacion
+namespace SimuRails.UI.ABMSimulacion
 {
     public partial class frmBarraProgreso : Form
     {

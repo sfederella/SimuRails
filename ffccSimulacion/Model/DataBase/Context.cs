@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ffccSimulacion.Model.Entities;
+using SimuRails.Model.Entities;
 
-namespace ffccSimulacion.Model.DataBase
+namespace SimuRails.Model.DataBase
 {
     public class Context
     {
-        private ffccSimulacionEntities context;
+        private SimuRailsEntities context;
         
         public Context()
         {
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
         }
 
 

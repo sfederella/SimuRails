@@ -1,4 +1,4 @@
-﻿namespace ffccSimulacion.UI.ABMIncidente
+﻿namespace SimuRails.UI.ABMIncidente
 {
     partial class frmABMIncidente
     {
@@ -630,7 +630,7 @@
             // 
             // btnEliminarIncidente
             // 
-            this.btnEliminarIncidente.Image = global::ffccSimulacion.Properties.Resources.bin_icon_1488050992;
+            this.btnEliminarIncidente.Image = global::SimuRails.Properties.Resources.bin_icon_1488050992;
             this.btnEliminarIncidente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminarIncidente.Location = new System.Drawing.Point(165, 75);
             this.btnEliminarIncidente.Name = "btnEliminarIncidente";

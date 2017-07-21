@@ -1,4 +1,4 @@
-﻿using ffccSimulacion.Model.Entities;
+﻿using SimuRails.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ffccSimulacion.UI.ABMServicio
+namespace SimuRails.UI.ABMServicio
 {
     public partial class frmABMServicio : Form
     {
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
         List<Relaciones> auxRelaciones;
         string programacionCrear;
         string programacionModificar;
@@ -22,7 +22,7 @@ namespace ffccSimulacion.UI.ABMServicio
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
             auxRelaciones = new List<Relaciones>();
 
             /*Por un error en el framework estas propiedades no aparecen en el diseñador de las vistas ni sugeridas cuando se escriben.

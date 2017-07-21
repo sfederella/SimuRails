@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ffccSimulacion.Model.Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Coches">
+      <Schema Namespace="SimuRails.Model.Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Coche">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Modelo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="EsLocomotora" Type="int" />
+          <Property Name="EsLocomotora" Type="bit" />
           <Property Name="TipoConsumo" Type="int" />
           <Property Name="ConsumoMovimiento" Type="int" />
           <Property Name="ConsumoParado" Type="int" />
@@ -19,7 +19,7 @@
           <Property Name="MaximoLegalPasajeros" Type="int" Nullable="false" />
           <Property Name="CapacidadMaximaPasajeros" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Estaciones">
+        <EntityType Name="Estacion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -29,7 +29,7 @@
           <Property Name="PersonasEsperandoMax" Type="int" Nullable="false" />
           <Property Name="TipoFDP" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Estaciones_X_Incidentes">
+        <EntityType Name="Estacion_X_Incidente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -37,14 +37,14 @@
           <Property Name="Id_Incidente" Type="int" Nullable="false" />
           <Property Name="Id_Estacion" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Formaciones">
+        <EntityType Name="Formacion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NombreFormacion" Type="varchar" MaxLength="100" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="Formaciones_X_Coches">
+        <EntityType Name="Formacion_X_Coche">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -53,7 +53,7 @@
           <Property Name="Id_Coche" Type="int" Nullable="false" />
           <Property Name="VecesRepetido" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Incidentes">
+        <EntityType Name="Incidente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -63,7 +63,34 @@
           <Property Name="ProbabilidadOcurrencia" Type="int" Nullable="false" />
           <Property Name="TiempoDemora" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Relaciones">
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Id_Estacion_Mantenimiento" Type="int" />
+        </EntityType>
+        <EntityType Name="Servicio_X_Formacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Servicio" Type="int" Nullable="false" />
+          <Property Name="Id_Formacion" Type="int" Nullable="false" />
+          <Property Name="CantFormaciones" Type="int" />
+        </EntityType>
+        <EntityType Name="Simulacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TiempoInicial" Type="int" Nullable="false" />
+          <Property Name="TiempoFinal" Type="int" Nullable="false" />
+          <Property Name="Id_Traza" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tramo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -72,43 +99,18 @@
           <Property Name="Id_Estacion_Siguiente" Type="int" Nullable="false" />
           <Property Name="Id_Servicio" Type="int" Nullable="false" />
           <Property Name="Distancia" Type="int" Nullable="false" />
+          <Property Name="VelocidadPromedio" Type="int" Nullable="false" />
           <Property Name="TiempoViaje" Type="int" Nullable="false" />
-          <Property Name="Est_Sig_Es_Parada" Type="int" Nullable="false" />
+          <Property Name="EstSigEsParada" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Servicios">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="ProgramacionStr" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Servicios_X_Formaciones">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Servicio" Type="int" Nullable="false" />
-          <Property Name="Id_Formacion" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Simulaciones">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Tiempo_Inicial" Type="int" Nullable="false" />
-          <Property Name="Tiempo_Final" Type="int" Nullable="false" />
-          <Property Name="Id_Traza" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Trazas">
+        <EntityType Name="Traza">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityType Name="Trazas_X_Servicios">
+        <EntityType Name="Traza_X_Servicio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -117,232 +119,248 @@
           <Property Name="Id_Traza" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Estaciones_X_Incidentes__Estaciones">
-          <End Role="Estaciones" Type="Self.Estaciones" Multiplicity="1" />
-          <End Role="Estaciones_X_Incidentes" Type="Self.Estaciones_X_Incidentes" Multiplicity="*" />
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="1" />
+          <End Role="Estacion_X_Incidente" Type="Self.Estacion_X_Incidente" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Estaciones">
+            <Principal Role="Estacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Estaciones_X_Incidentes">
+            <Dependent Role="Estacion_X_Incidente">
               <PropertyRef Name="Id_Estacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Estaciones_X_Incidentes__Incidentes">
-          <End Role="Incidentes" Type="Self.Incidentes" Multiplicity="1" />
-          <End Role="Estaciones_X_Incidentes" Type="Self.Estaciones_X_Incidentes" Multiplicity="*" />
+          <End Role="Incidente" Type="Self.Incidente" Multiplicity="1" />
+          <End Role="Estacion_X_Incidente" Type="Self.Estacion_X_Incidente" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Incidentes">
+            <Principal Role="Incidente">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Estaciones_X_Incidentes">
+            <Dependent Role="Estacion_X_Incidente">
               <PropertyRef Name="Id_Incidente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Formaciones_X_Coches__Coche">
-          <End Role="Coches" Type="Self.Coches" Multiplicity="1" />
-          <End Role="Formaciones_X_Coches" Type="Self.Formaciones_X_Coches" Multiplicity="*" />
+          <End Role="Coche" Type="Self.Coche" Multiplicity="1" />
+          <End Role="Formacion_X_Coche" Type="Self.Formacion_X_Coche" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Coches">
+            <Principal Role="Coche">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Formaciones_X_Coches">
+            <Dependent Role="Formacion_X_Coche">
               <PropertyRef Name="Id_Coche" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Formaciones_X_Coches__Formaciones">
-          <End Role="Formaciones" Type="Self.Formaciones" Multiplicity="1" />
-          <End Role="Formaciones_X_Coches" Type="Self.Formaciones_X_Coches" Multiplicity="*" />
+          <End Role="Formacion" Type="Self.Formacion" Multiplicity="1" />
+          <End Role="Formacion_X_Coche" Type="Self.Formacion_X_Coche" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Formaciones">
+            <Principal Role="Formacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Formaciones_X_Coches">
+            <Dependent Role="Formacion_X_Coche">
               <PropertyRef Name="Id_Formacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Relacion_Estacion_Anterior">
-          <End Role="Estaciones" Type="Self.Estaciones" Multiplicity="1" />
-          <End Role="Relaciones" Type="Self.Relaciones" Multiplicity="*" />
+        <Association Name="FK_Servicio_Estacion">
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Estaciones">
+            <Principal Role="Estacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Relaciones">
-              <PropertyRef Name="Id_Estacion_Anterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Relacion_Estacion_Siguiente">
-          <End Role="Estaciones" Type="Self.Estaciones" Multiplicity="1" />
-          <End Role="Relaciones" Type="Self.Relaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estaciones">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Relaciones">
-              <PropertyRef Name="Id_Estacion_Siguiente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Relacion_Servicio">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="Relaciones" Type="Self.Relaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Relaciones">
-              <PropertyRef Name="Id_Servicio" />
+            <Dependent Role="Servicio">
+              <PropertyRef Name="Id_Estacion_Mantenimiento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Servicios_X_Formaciones__Formacion">
-          <End Role="Formaciones" Type="Self.Formaciones" Multiplicity="1" />
-          <End Role="Servicios_X_Formaciones" Type="Self.Servicios_X_Formaciones" Multiplicity="*" />
+          <End Role="Formacion" Type="Self.Formacion" Multiplicity="1" />
+          <End Role="Servicio_X_Formacion" Type="Self.Servicio_X_Formacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Formaciones">
+            <Principal Role="Formacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Servicios_X_Formaciones">
+            <Dependent Role="Servicio_X_Formacion">
               <PropertyRef Name="Id_Formacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Servicios_X_Formaciones__Servicio">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="Servicios_X_Formaciones" Type="Self.Servicios_X_Formaciones" Multiplicity="*" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="Servicio_X_Formacion" Type="Self.Servicio_X_Formacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Servicios">
+            <Principal Role="Servicio">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Servicios_X_Formaciones">
+            <Dependent Role="Servicio_X_Formacion">
               <PropertyRef Name="Id_Servicio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Simulacion_Traza">
-          <End Role="Trazas" Type="Self.Trazas" Multiplicity="1" />
-          <End Role="Simulaciones" Type="Self.Simulaciones" Multiplicity="*" />
+          <End Role="Traza" Type="Self.Traza" Multiplicity="1" />
+          <End Role="Simulacion" Type="Self.Simulacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Trazas">
+            <Principal Role="Traza">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Simulaciones">
+            <Dependent Role="Simulacion">
               <PropertyRef Name="Id_Traza" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Trazas_X_Servicios__Servicio">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="Trazas_X_Servicios" Type="Self.Trazas_X_Servicios" Multiplicity="*" />
+        <Association Name="FK_Tramo_Estacion">
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Servicios">
+            <Principal Role="Estacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Trazas_X_Servicios">
+            <Dependent Role="Tramo">
+              <PropertyRef Name="Id_Estacion_Anterior" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramo_Estacion1">
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tramo">
+              <PropertyRef Name="Id_Estacion_Siguiente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramo_Servicio">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tramo">
+              <PropertyRef Name="Id_Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trazas_X_Servicios__Servicio">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="Traza_X_Servicio" Type="Self.Traza_X_Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Traza_X_Servicio">
               <PropertyRef Name="Id_Servicio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Trazas_X_Servicios__Traza">
-          <End Role="Trazas" Type="Self.Trazas" Multiplicity="1" />
-          <End Role="Trazas_X_Servicios" Type="Self.Trazas_X_Servicios" Multiplicity="*" />
+          <End Role="Traza" Type="Self.Traza" Multiplicity="1" />
+          <End Role="Traza_X_Servicio" Type="Self.Traza_X_Servicio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Trazas">
+            <Principal Role="Traza">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Trazas_X_Servicios">
+            <Dependent Role="Traza_X_Servicio">
               <PropertyRef Name="Id_Traza" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ffccSimulacionModelEntitiesStoreContainer">
-          <EntitySet Name="Coches" EntityType="Self.Coches" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Estaciones" EntityType="Self.Estaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Estaciones_X_Incidentes" EntityType="Self.Estaciones_X_Incidentes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Formaciones" EntityType="Self.Formaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Formaciones_X_Coches" EntityType="Self.Formaciones_X_Coches" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Incidentes" EntityType="Self.Incidentes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Relaciones" EntityType="Self.Relaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Servicios_X_Formaciones" EntityType="Self.Servicios_X_Formaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Simulaciones" EntityType="Self.Simulaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Trazas" EntityType="Self.Trazas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Trazas_X_Servicios" EntityType="Self.Trazas_X_Servicios" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="SimuRailsModelEntitiesStoreContainer">
+          <EntitySet Name="Coche" EntityType="Self.Coche" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estacion" EntityType="Self.Estacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estacion_X_Incidente" EntityType="Self.Estacion_X_Incidente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formacion" EntityType="Self.Formacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formacion_X_Coche" EntityType="Self.Formacion_X_Coche" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Incidente" EntityType="Self.Incidente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio_X_Formacion" EntityType="Self.Servicio_X_Formacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Simulacion" EntityType="Self.Simulacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tramo" EntityType="Self.Tramo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Traza" EntityType="Self.Traza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Traza_X_Servicio" EntityType="Self.Traza_X_Servicio" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Estaciones_X_Incidentes__Estaciones" Association="Self.FK_Estaciones_X_Incidentes__Estaciones">
-            <End Role="Estaciones" EntitySet="Estaciones" />
-            <End Role="Estaciones_X_Incidentes" EntitySet="Estaciones_X_Incidentes" />
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Estacion_X_Incidente" EntitySet="Estacion_X_Incidente" />
           </AssociationSet>
           <AssociationSet Name="FK_Estaciones_X_Incidentes__Incidentes" Association="Self.FK_Estaciones_X_Incidentes__Incidentes">
-            <End Role="Incidentes" EntitySet="Incidentes" />
-            <End Role="Estaciones_X_Incidentes" EntitySet="Estaciones_X_Incidentes" />
+            <End Role="Incidente" EntitySet="Incidente" />
+            <End Role="Estacion_X_Incidente" EntitySet="Estacion_X_Incidente" />
           </AssociationSet>
           <AssociationSet Name="FK_Formaciones_X_Coches__Coche" Association="Self.FK_Formaciones_X_Coches__Coche">
-            <End Role="Coches" EntitySet="Coches" />
-            <End Role="Formaciones_X_Coches" EntitySet="Formaciones_X_Coches" />
+            <End Role="Coche" EntitySet="Coche" />
+            <End Role="Formacion_X_Coche" EntitySet="Formacion_X_Coche" />
           </AssociationSet>
           <AssociationSet Name="FK_Formaciones_X_Coches__Formaciones" Association="Self.FK_Formaciones_X_Coches__Formaciones">
-            <End Role="Formaciones" EntitySet="Formaciones" />
-            <End Role="Formaciones_X_Coches" EntitySet="Formaciones_X_Coches" />
+            <End Role="Formacion" EntitySet="Formacion" />
+            <End Role="Formacion_X_Coche" EntitySet="Formacion_X_Coche" />
           </AssociationSet>
-          <AssociationSet Name="FK_Relacion_Estacion_Anterior" Association="Self.FK_Relacion_Estacion_Anterior">
-            <End Role="Estaciones" EntitySet="Estaciones" />
-            <End Role="Relaciones" EntitySet="Relaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Relacion_Estacion_Siguiente" Association="Self.FK_Relacion_Estacion_Siguiente">
-            <End Role="Estaciones" EntitySet="Estaciones" />
-            <End Role="Relaciones" EntitySet="Relaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Relacion_Servicio" Association="Self.FK_Relacion_Servicio">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Relaciones" EntitySet="Relaciones" />
+          <AssociationSet Name="FK_Servicio_Estacion" Association="Self.FK_Servicio_Estacion">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Servicio" EntitySet="Servicio" />
           </AssociationSet>
           <AssociationSet Name="FK_Servicios_X_Formaciones__Formacion" Association="Self.FK_Servicios_X_Formaciones__Formacion">
-            <End Role="Formaciones" EntitySet="Formaciones" />
-            <End Role="Servicios_X_Formaciones" EntitySet="Servicios_X_Formaciones" />
+            <End Role="Formacion" EntitySet="Formacion" />
+            <End Role="Servicio_X_Formacion" EntitySet="Servicio_X_Formacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Servicios_X_Formaciones__Servicio" Association="Self.FK_Servicios_X_Formaciones__Servicio">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Servicios_X_Formaciones" EntitySet="Servicios_X_Formaciones" />
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Servicio_X_Formacion" EntitySet="Servicio_X_Formacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Simulacion_Traza" Association="Self.FK_Simulacion_Traza">
-            <End Role="Trazas" EntitySet="Trazas" />
-            <End Role="Simulaciones" EntitySet="Simulaciones" />
+            <End Role="Traza" EntitySet="Traza" />
+            <End Role="Simulacion" EntitySet="Simulacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Estacion" Association="Self.FK_Tramo_Estacion">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Tramo" EntitySet="Tramo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Estacion1" Association="Self.FK_Tramo_Estacion1">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Tramo" EntitySet="Tramo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Servicio" Association="Self.FK_Tramo_Servicio">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Tramo" EntitySet="Tramo" />
           </AssociationSet>
           <AssociationSet Name="FK_Trazas_X_Servicios__Servicio" Association="Self.FK_Trazas_X_Servicios__Servicio">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Trazas_X_Servicios" EntitySet="Trazas_X_Servicios" />
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Traza_X_Servicio" EntitySet="Traza_X_Servicio" />
           </AssociationSet>
           <AssociationSet Name="FK_Trazas_X_Servicios__Traza" Association="Self.FK_Trazas_X_Servicios__Traza">
-            <End Role="Trazas" EntitySet="Trazas" />
-            <End Role="Trazas_X_Servicios" EntitySet="Trazas_X_Servicios" />
+            <End Role="Traza" EntitySet="Traza" />
+            <End Role="Traza_X_Servicio" EntitySet="Traza_X_Servicio" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ffccSimulacion.Model.Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Coches">
+      <Schema Namespace="SimuRails.Model.Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Coche">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EsLocomotora" Type="Int32" />
+          <Property Name="EsLocomotora" Type="Boolean" />
           <Property Name="TipoConsumo" Type="Int32" />
           <Property Name="ConsumoMovimiento" Type="Int32" />
           <Property Name="ConsumoParado" Type="Int32" />
           <Property Name="CantidadAsientos" Type="Int32" Nullable="false" />
           <Property Name="MaximoLegalPasajeros" Type="Int32" Nullable="false" />
           <Property Name="CapacidadMaximaPasajeros" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Formaciones_X_Coches" Relationship="Self.FK_Formaciones_X_Coches__Coche" FromRole="Coches" ToRole="Formaciones_X_Coches" />
+          <NavigationProperty Name="Formacion_X_Coche" Relationship="Self.FK_Formaciones_X_Coches__Coche" FromRole="Coche" ToRole="Formacion_X_Coche" />
         </EntityType>
-        <EntityType Name="Estaciones">
+        <EntityType Name="Estacion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -351,30 +369,31 @@
           <Property Name="PersonasEsperandoMin" Type="Int32" Nullable="false" />
           <Property Name="PersonasEsperandoMax" Type="Int32" Nullable="false" />
           <Property Name="TipoFDP" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estaciones_X_Incidentes" Relationship="Self.FK_Estaciones_X_Incidentes__Estaciones" FromRole="Estaciones" ToRole="Estaciones_X_Incidentes" />
-          <NavigationProperty Name="Relaciones" Relationship="Self.FK_Relacion_Estacion_Anterior" FromRole="Estaciones" ToRole="Relaciones" />
-          <NavigationProperty Name="Relaciones1" Relationship="Self.FK_Relacion_Estacion_Siguiente" FromRole="Estaciones" ToRole="Relaciones" />
+          <NavigationProperty Name="Estacion_X_Incidente" Relationship="Self.FK_Estaciones_X_Incidentes__Estaciones" FromRole="Estacion" ToRole="Estacion_X_Incidente" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_Servicio_Estacion" FromRole="Estacion" ToRole="Servicio" />
+          <NavigationProperty Name="Tramo" Relationship="Self.FK_Tramo_Estacion" FromRole="Estacion" ToRole="Tramo" />
+          <NavigationProperty Name="Tramo1" Relationship="Self.FK_Tramo_Estacion1" FromRole="Estacion" ToRole="Tramo" />
         </EntityType>
-        <EntityType Name="Estaciones_X_Incidentes">
+        <EntityType Name="Estacion_X_Incidente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Incidente" Type="Int32" Nullable="false" />
           <Property Name="Id_Estacion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estaciones" Relationship="Self.FK_Estaciones_X_Incidentes__Estaciones" FromRole="Estaciones_X_Incidentes" ToRole="Estaciones" />
-          <NavigationProperty Name="Incidentes" Relationship="Self.FK_Estaciones_X_Incidentes__Incidentes" FromRole="Estaciones_X_Incidentes" ToRole="Incidentes" />
+          <NavigationProperty Name="Estacion" Relationship="Self.FK_Estaciones_X_Incidentes__Estaciones" FromRole="Estacion_X_Incidente" ToRole="Estacion" />
+          <NavigationProperty Name="Incidente" Relationship="Self.FK_Estaciones_X_Incidentes__Incidentes" FromRole="Estacion_X_Incidente" ToRole="Incidente" />
         </EntityType>
-        <EntityType Name="Formaciones">
+        <EntityType Name="Formacion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreFormacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Formaciones_X_Coches" Relationship="Self.FK_Formaciones_X_Coches__Formaciones" FromRole="Formaciones" ToRole="Formaciones_X_Coches" />
-          <NavigationProperty Name="Servicios_X_Formaciones" Relationship="Self.FK_Servicios_X_Formaciones__Formacion" FromRole="Formaciones" ToRole="Servicios_X_Formaciones" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Formacion_X_Coche" Relationship="Self.FK_Formaciones_X_Coches__Formaciones" FromRole="Formacion" ToRole="Formacion_X_Coche" />
+          <NavigationProperty Name="Servicio_X_Formacion" Relationship="Self.FK_Servicios_X_Formaciones__Formacion" FromRole="Formacion" ToRole="Servicio_X_Formacion" />
         </EntityType>
-        <EntityType Name="Formaciones_X_Coches">
+        <EntityType Name="Formacion_X_Coche">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -382,10 +401,10 @@
           <Property Name="Id_Formacion" Type="Int32" Nullable="false" />
           <Property Name="Id_Coche" Type="Int32" Nullable="false" />
           <Property Name="VecesRepetido" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Coches" Relationship="Self.FK_Formaciones_X_Coches__Coche" FromRole="Formaciones_X_Coches" ToRole="Coches" />
-          <NavigationProperty Name="Formaciones" Relationship="Self.FK_Formaciones_X_Coches__Formaciones" FromRole="Formaciones_X_Coches" ToRole="Formaciones" />
+          <NavigationProperty Name="Coche" Relationship="Self.FK_Formaciones_X_Coches__Coche" FromRole="Formacion_X_Coche" ToRole="Coche" />
+          <NavigationProperty Name="Formacion" Relationship="Self.FK_Formaciones_X_Coches__Formaciones" FromRole="Formacion_X_Coche" ToRole="Formacion" />
         </EntityType>
-        <EntityType Name="Incidentes">
+        <EntityType Name="Incidente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -394,9 +413,43 @@
           <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProbabilidadOcurrencia" Type="Int32" Nullable="false" />
           <Property Name="TiempoDemora" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estaciones_X_Incidentes" Relationship="Self.FK_Estaciones_X_Incidentes__Incidentes" FromRole="Incidentes" ToRole="Estaciones_X_Incidentes" />
+          <NavigationProperty Name="Estacion_X_Incidente" Relationship="Self.FK_Estaciones_X_Incidentes__Incidentes" FromRole="Incidente" ToRole="Estacion_X_Incidente" />
         </EntityType>
-        <EntityType Name="Relaciones">
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Estacion_Mantenimiento" Type="Int32" />
+          <NavigationProperty Name="Estacion" Relationship="Self.FK_Servicio_Estacion" FromRole="Servicio" ToRole="Estacion" />
+          <NavigationProperty Name="Servicio_X_Formacion" Relationship="Self.FK_Servicios_X_Formaciones__Servicio" FromRole="Servicio" ToRole="Servicio_X_Formacion" />
+          <NavigationProperty Name="Tramo" Relationship="Self.FK_Tramo_Servicio" FromRole="Servicio" ToRole="Tramo" />
+          <NavigationProperty Name="Traza_X_Servicio" Relationship="Self.FK_Trazas_X_Servicios__Servicio" FromRole="Servicio" ToRole="Traza_X_Servicio" />
+        </EntityType>
+        <EntityType Name="Servicio_X_Formacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
+          <Property Name="Id_Formacion" Type="Int32" Nullable="false" />
+          <Property Name="CantFormaciones" Type="Int32" />
+          <NavigationProperty Name="Formacion" Relationship="Self.FK_Servicios_X_Formaciones__Formacion" FromRole="Servicio_X_Formacion" ToRole="Formacion" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_Servicios_X_Formaciones__Servicio" FromRole="Servicio_X_Formacion" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="Simulacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TiempoInicial" Type="Int32" Nullable="false" />
+          <Property Name="TiempoFinal" Type="Int32" Nullable="false" />
+          <Property Name="Id_Traza" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Traza" Relationship="Self.FK_Simulacion_Traza" FromRole="Simulacion" ToRole="Traza" />
+        </EntityType>
+        <EntityType Name="Tramo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -405,267 +458,252 @@
           <Property Name="Id_Estacion_Siguiente" Type="Int32" Nullable="false" />
           <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
           <Property Name="Distancia" Type="Int32" Nullable="false" />
+          <Property Name="VelocidadPromedio" Type="Int32" Nullable="false" />
           <Property Name="TiempoViaje" Type="Int32" Nullable="false" />
-          <Property Name="Est_Sig_Es_Parada" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estaciones" Relationship="Self.FK_Relacion_Estacion_Anterior" FromRole="Relaciones" ToRole="Estaciones" />
-          <NavigationProperty Name="Estaciones1" Relationship="Self.FK_Relacion_Estacion_Siguiente" FromRole="Relaciones" ToRole="Estaciones" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK_Relacion_Servicio" FromRole="Relaciones" ToRole="Servicios" />
+          <Property Name="EstSigEsParada" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Estacion" Relationship="Self.FK_Tramo_Estacion" FromRole="Tramo" ToRole="Estacion" />
+          <NavigationProperty Name="Estacion1" Relationship="Self.FK_Tramo_Estacion1" FromRole="Tramo" ToRole="Estacion" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_Tramo_Servicio" FromRole="Tramo" ToRole="Servicio" />
         </EntityType>
-        <EntityType Name="Servicios">
+        <EntityType Name="Traza">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ProgramacionStr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Relaciones" Relationship="Self.FK_Relacion_Servicio" FromRole="Servicios" ToRole="Relaciones" />
-          <NavigationProperty Name="Servicios_X_Formaciones" Relationship="Self.FK_Servicios_X_Formaciones__Servicio" FromRole="Servicios" ToRole="Servicios_X_Formaciones" />
-          <NavigationProperty Name="Trazas_X_Servicios" Relationship="Self.FK_Trazas_X_Servicios__Servicio" FromRole="Servicios" ToRole="Trazas_X_Servicios" />
+          <NavigationProperty Name="Simulacion" Relationship="Self.FK_Simulacion_Traza" FromRole="Traza" ToRole="Simulacion" />
+          <NavigationProperty Name="Traza_X_Servicio" Relationship="Self.FK_Trazas_X_Servicios__Traza" FromRole="Traza" ToRole="Traza_X_Servicio" />
         </EntityType>
-        <EntityType Name="Servicios_X_Formaciones">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
-          <Property Name="Id_Formacion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Formaciones" Relationship="Self.FK_Servicios_X_Formaciones__Formacion" FromRole="Servicios_X_Formaciones" ToRole="Formaciones" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK_Servicios_X_Formaciones__Servicio" FromRole="Servicios_X_Formaciones" ToRole="Servicios" />
-        </EntityType>
-        <EntityType Name="Simulaciones">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Tiempo_Inicial" Type="Int32" Nullable="false" />
-          <Property Name="Tiempo_Final" Type="Int32" Nullable="false" />
-          <Property Name="Id_Traza" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Trazas" Relationship="Self.FK_Simulacion_Traza" FromRole="Simulaciones" ToRole="Trazas" />
-        </EntityType>
-        <EntityType Name="Trazas">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Simulaciones" Relationship="Self.FK_Simulacion_Traza" FromRole="Trazas" ToRole="Simulaciones" />
-          <NavigationProperty Name="Trazas_X_Servicios" Relationship="Self.FK_Trazas_X_Servicios__Traza" FromRole="Trazas" ToRole="Trazas_X_Servicios" />
-        </EntityType>
-        <EntityType Name="Trazas_X_Servicios">
+        <EntityType Name="Traza_X_Servicio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
           <Property Name="Id_Traza" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK_Trazas_X_Servicios__Servicio" FromRole="Trazas_X_Servicios" ToRole="Servicios" />
-          <NavigationProperty Name="Trazas" Relationship="Self.FK_Trazas_X_Servicios__Traza" FromRole="Trazas_X_Servicios" ToRole="Trazas" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_Trazas_X_Servicios__Servicio" FromRole="Traza_X_Servicio" ToRole="Servicio" />
+          <NavigationProperty Name="Traza" Relationship="Self.FK_Trazas_X_Servicios__Traza" FromRole="Traza_X_Servicio" ToRole="Traza" />
         </EntityType>
         <Association Name="FK_Formaciones_X_Coches__Coche">
-          <End Role="Coches" Type="Self.Coches" Multiplicity="1" />
-          <End Role="Formaciones_X_Coches" Type="Self.Formaciones_X_Coches" Multiplicity="*" />
+          <End Role="Coche" Type="Self.Coche" Multiplicity="1" />
+          <End Role="Formacion_X_Coche" Type="Self.Formacion_X_Coche" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Coches">
+            <Principal Role="Coche">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Formaciones_X_Coches">
+            <Dependent Role="Formacion_X_Coche">
               <PropertyRef Name="Id_Coche" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Estaciones_X_Incidentes__Estaciones">
-          <End Role="Estaciones" Type="Self.Estaciones" Multiplicity="1" />
-          <End Role="Estaciones_X_Incidentes" Type="Self.Estaciones_X_Incidentes" Multiplicity="*" />
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="1" />
+          <End Role="Estacion_X_Incidente" Type="Self.Estacion_X_Incidente" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Estaciones">
+            <Principal Role="Estacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Estaciones_X_Incidentes">
+            <Dependent Role="Estacion_X_Incidente">
               <PropertyRef Name="Id_Estacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Relacion_Estacion_Anterior">
-          <End Role="Estaciones" Type="Self.Estaciones" Multiplicity="1" />
-          <End Role="Relaciones" Type="Self.Relaciones" Multiplicity="*" />
+        <Association Name="FK_Servicio_Estacion">
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Estaciones">
+            <Principal Role="Estacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Relaciones">
+            <Dependent Role="Servicio">
+              <PropertyRef Name="Id_Estacion_Mantenimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramo_Estacion">
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tramo">
               <PropertyRef Name="Id_Estacion_Anterior" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Relacion_Estacion_Siguiente">
-          <End Role="Estaciones" Type="Self.Estaciones" Multiplicity="1" />
-          <End Role="Relaciones" Type="Self.Relaciones" Multiplicity="*" />
+        <Association Name="FK_Tramo_Estacion1">
+          <End Role="Estacion" Type="Self.Estacion" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Estaciones">
+            <Principal Role="Estacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Relaciones">
+            <Dependent Role="Tramo">
               <PropertyRef Name="Id_Estacion_Siguiente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Estaciones_X_Incidentes__Incidentes">
-          <End Role="Incidentes" Type="Self.Incidentes" Multiplicity="1" />
-          <End Role="Estaciones_X_Incidentes" Type="Self.Estaciones_X_Incidentes" Multiplicity="*" />
+          <End Role="Incidente" Type="Self.Incidente" Multiplicity="1" />
+          <End Role="Estacion_X_Incidente" Type="Self.Estacion_X_Incidente" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Incidentes">
+            <Principal Role="Incidente">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Estaciones_X_Incidentes">
+            <Dependent Role="Estacion_X_Incidente">
               <PropertyRef Name="Id_Incidente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Formaciones_X_Coches__Formaciones">
-          <End Role="Formaciones" Type="Self.Formaciones" Multiplicity="1" />
-          <End Role="Formaciones_X_Coches" Type="Self.Formaciones_X_Coches" Multiplicity="*" />
+          <End Role="Formacion" Type="Self.Formacion" Multiplicity="1" />
+          <End Role="Formacion_X_Coche" Type="Self.Formacion_X_Coche" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Formaciones">
+            <Principal Role="Formacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Formaciones_X_Coches">
+            <Dependent Role="Formacion_X_Coche">
               <PropertyRef Name="Id_Formacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Servicios_X_Formaciones__Formacion">
-          <End Role="Formaciones" Type="Self.Formaciones" Multiplicity="1" />
-          <End Role="Servicios_X_Formaciones" Type="Self.Servicios_X_Formaciones" Multiplicity="*" />
+          <End Role="Formacion" Type="Self.Formacion" Multiplicity="1" />
+          <End Role="Servicio_X_Formacion" Type="Self.Servicio_X_Formacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Formaciones">
+            <Principal Role="Formacion">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Servicios_X_Formaciones">
+            <Dependent Role="Servicio_X_Formacion">
               <PropertyRef Name="Id_Formacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Relacion_Servicio">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="Relaciones" Type="Self.Relaciones" Multiplicity="*" />
+        <Association Name="FK_Servicios_X_Formaciones__Servicio">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="Servicio_X_Formacion" Type="Self.Servicio_X_Formacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Servicios">
+            <Principal Role="Servicio">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Relaciones">
+            <Dependent Role="Servicio_X_Formacion">
               <PropertyRef Name="Id_Servicio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Servicios_X_Formaciones__Servicio">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="Servicios_X_Formaciones" Type="Self.Servicios_X_Formaciones" Multiplicity="*" />
+        <Association Name="FK_Tramo_Servicio">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Servicios">
+            <Principal Role="Servicio">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Servicios_X_Formaciones">
+            <Dependent Role="Tramo">
               <PropertyRef Name="Id_Servicio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Trazas_X_Servicios__Servicio">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="Trazas_X_Servicios" Type="Self.Trazas_X_Servicios" Multiplicity="*" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="Traza_X_Servicio" Type="Self.Traza_X_Servicio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Servicios">
+            <Principal Role="Servicio">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Trazas_X_Servicios">
+            <Dependent Role="Traza_X_Servicio">
               <PropertyRef Name="Id_Servicio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Simulacion_Traza">
-          <End Role="Trazas" Type="Self.Trazas" Multiplicity="1" />
-          <End Role="Simulaciones" Type="Self.Simulaciones" Multiplicity="*" />
+          <End Role="Traza" Type="Self.Traza" Multiplicity="1" />
+          <End Role="Simulacion" Type="Self.Simulacion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Trazas">
+            <Principal Role="Traza">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Simulaciones">
+            <Dependent Role="Simulacion">
               <PropertyRef Name="Id_Traza" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Trazas_X_Servicios__Traza">
-          <End Role="Trazas" Type="Self.Trazas" Multiplicity="1" />
-          <End Role="Trazas_X_Servicios" Type="Self.Trazas_X_Servicios" Multiplicity="*" />
+          <End Role="Traza" Type="Self.Traza" Multiplicity="1" />
+          <End Role="Traza_X_Servicio" Type="Self.Traza_X_Servicio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Trazas">
+            <Principal Role="Traza">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Trazas_X_Servicios">
+            <Dependent Role="Traza_X_Servicio">
               <PropertyRef Name="Id_Traza" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Coches" EntityType="Self.Coches" />
-          <EntitySet Name="Estaciones" EntityType="Self.Estaciones" />
-          <EntitySet Name="Estaciones_X_Incidentes" EntityType="Self.Estaciones_X_Incidentes" />
-          <EntitySet Name="Formaciones" EntityType="Self.Formaciones" />
-          <EntitySet Name="Formaciones_X_Coches" EntityType="Self.Formaciones_X_Coches" />
-          <EntitySet Name="Incidentes" EntityType="Self.Incidentes" />
-          <EntitySet Name="Relaciones" EntityType="Self.Relaciones" />
-          <EntitySet Name="Servicios" EntityType="Self.Servicios" />
-          <EntitySet Name="Servicios_X_Formaciones" EntityType="Self.Servicios_X_Formaciones" />
-          <EntitySet Name="Simulaciones" EntityType="Self.Simulaciones" />
-          <EntitySet Name="Trazas" EntityType="Self.Trazas" />
-          <EntitySet Name="Trazas_X_Servicios" EntityType="Self.Trazas_X_Servicios" />
+        <EntityContainer Name="SimuRailsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Coche" EntityType="Self.Coche" />
+          <EntitySet Name="Estacion" EntityType="Self.Estacion" />
+          <EntitySet Name="Estacion_X_Incidente" EntityType="Self.Estacion_X_Incidente" />
+          <EntitySet Name="Formacion" EntityType="Self.Formacion" />
+          <EntitySet Name="Formacion_X_Coche" EntityType="Self.Formacion_X_Coche" />
+          <EntitySet Name="Incidente" EntityType="Self.Incidente" />
+          <EntitySet Name="Servicio" EntityType="Self.Servicio" />
+          <EntitySet Name="Servicio_X_Formacion" EntityType="Self.Servicio_X_Formacion" />
+          <EntitySet Name="Simulacion" EntityType="Self.Simulacion" />
+          <EntitySet Name="Tramo" EntityType="Self.Tramo" />
+          <EntitySet Name="Traza" EntityType="Self.Traza" />
+          <EntitySet Name="Traza_X_Servicio" EntityType="Self.Traza_X_Servicio" />
           <AssociationSet Name="FK_Formaciones_X_Coches__Coche" Association="Self.FK_Formaciones_X_Coches__Coche">
-            <End Role="Coches" EntitySet="Coches" />
-            <End Role="Formaciones_X_Coches" EntitySet="Formaciones_X_Coches" />
+            <End Role="Coche" EntitySet="Coche" />
+            <End Role="Formacion_X_Coche" EntitySet="Formacion_X_Coche" />
           </AssociationSet>
           <AssociationSet Name="FK_Estaciones_X_Incidentes__Estaciones" Association="Self.FK_Estaciones_X_Incidentes__Estaciones">
-            <End Role="Estaciones" EntitySet="Estaciones" />
-            <End Role="Estaciones_X_Incidentes" EntitySet="Estaciones_X_Incidentes" />
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Estacion_X_Incidente" EntitySet="Estacion_X_Incidente" />
           </AssociationSet>
-          <AssociationSet Name="FK_Relacion_Estacion_Anterior" Association="Self.FK_Relacion_Estacion_Anterior">
-            <End Role="Estaciones" EntitySet="Estaciones" />
-            <End Role="Relaciones" EntitySet="Relaciones" />
+          <AssociationSet Name="FK_Servicio_Estacion" Association="Self.FK_Servicio_Estacion">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Servicio" EntitySet="Servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK_Relacion_Estacion_Siguiente" Association="Self.FK_Relacion_Estacion_Siguiente">
-            <End Role="Estaciones" EntitySet="Estaciones" />
-            <End Role="Relaciones" EntitySet="Relaciones" />
+          <AssociationSet Name="FK_Tramo_Estacion" Association="Self.FK_Tramo_Estacion">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Tramo" EntitySet="Tramo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Estacion1" Association="Self.FK_Tramo_Estacion1">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Tramo" EntitySet="Tramo" />
           </AssociationSet>
           <AssociationSet Name="FK_Estaciones_X_Incidentes__Incidentes" Association="Self.FK_Estaciones_X_Incidentes__Incidentes">
-            <End Role="Incidentes" EntitySet="Incidentes" />
-            <End Role="Estaciones_X_Incidentes" EntitySet="Estaciones_X_Incidentes" />
+            <End Role="Incidente" EntitySet="Incidente" />
+            <End Role="Estacion_X_Incidente" EntitySet="Estacion_X_Incidente" />
           </AssociationSet>
           <AssociationSet Name="FK_Formaciones_X_Coches__Formaciones" Association="Self.FK_Formaciones_X_Coches__Formaciones">
-            <End Role="Formaciones" EntitySet="Formaciones" />
-            <End Role="Formaciones_X_Coches" EntitySet="Formaciones_X_Coches" />
+            <End Role="Formacion" EntitySet="Formacion" />
+            <End Role="Formacion_X_Coche" EntitySet="Formacion_X_Coche" />
           </AssociationSet>
           <AssociationSet Name="FK_Servicios_X_Formaciones__Formacion" Association="Self.FK_Servicios_X_Formaciones__Formacion">
-            <End Role="Formaciones" EntitySet="Formaciones" />
-            <End Role="Servicios_X_Formaciones" EntitySet="Servicios_X_Formaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Relacion_Servicio" Association="Self.FK_Relacion_Servicio">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Relaciones" EntitySet="Relaciones" />
+            <End Role="Formacion" EntitySet="Formacion" />
+            <End Role="Servicio_X_Formacion" EntitySet="Servicio_X_Formacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Servicios_X_Formaciones__Servicio" Association="Self.FK_Servicios_X_Formaciones__Servicio">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Servicios_X_Formaciones" EntitySet="Servicios_X_Formaciones" />
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Servicio_X_Formacion" EntitySet="Servicio_X_Formacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Servicio" Association="Self.FK_Tramo_Servicio">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Tramo" EntitySet="Tramo" />
           </AssociationSet>
           <AssociationSet Name="FK_Trazas_X_Servicios__Servicio" Association="Self.FK_Trazas_X_Servicios__Servicio">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Trazas_X_Servicios" EntitySet="Trazas_X_Servicios" />
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Traza_X_Servicio" EntitySet="Traza_X_Servicio" />
           </AssociationSet>
           <AssociationSet Name="FK_Simulacion_Traza" Association="Self.FK_Simulacion_Traza">
-            <End Role="Trazas" EntitySet="Trazas" />
-            <End Role="Simulaciones" EntitySet="Simulaciones" />
+            <End Role="Traza" EntitySet="Traza" />
+            <End Role="Simulacion" EntitySet="Simulacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Trazas_X_Servicios__Traza" Association="Self.FK_Trazas_X_Servicios__Traza">
-            <End Role="Trazas" EntitySet="Trazas" />
-            <End Role="Trazas_X_Servicios" EntitySet="Trazas_X_Servicios" />
+            <End Role="Traza" EntitySet="Traza" />
+            <End Role="Traza_X_Servicio" EntitySet="Traza_X_Servicio" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -673,10 +711,10 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ffccSimulacionModelEntitiesStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Coches">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Coches">
-              <MappingFragment StoreEntitySet="Coches">
+        <EntityContainerMapping StorageEntityContainer="SimuRailsModelEntitiesStoreContainer" CdmEntityContainer="SimuRailsEntities">
+          <EntitySetMapping Name="Coche">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Coche">
+              <MappingFragment StoreEntitySet="Coche">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Modelo" ColumnName="Modelo" />
                 <ScalarProperty Name="EsLocomotora" ColumnName="EsLocomotora" />
@@ -689,9 +727,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Estaciones">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Estaciones">
-              <MappingFragment StoreEntitySet="Estaciones">
+          <EntitySetMapping Name="Estacion">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Estacion">
+              <MappingFragment StoreEntitySet="Estacion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="PersonasEsperandoMin" ColumnName="PersonasEsperandoMin" />
@@ -700,26 +738,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Estaciones_X_Incidentes">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Estaciones_X_Incidentes">
-              <MappingFragment StoreEntitySet="Estaciones_X_Incidentes">
+          <EntitySetMapping Name="Estacion_X_Incidente">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Estacion_X_Incidente">
+              <MappingFragment StoreEntitySet="Estacion_X_Incidente">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_Incidente" ColumnName="Id_Incidente" />
                 <ScalarProperty Name="Id_Estacion" ColumnName="Id_Estacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Formaciones">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Formaciones">
-              <MappingFragment StoreEntitySet="Formaciones">
+          <EntitySetMapping Name="Formacion">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Formacion">
+              <MappingFragment StoreEntitySet="Formacion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NombreFormacion" ColumnName="NombreFormacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Formaciones_X_Coches">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Formaciones_X_Coches">
-              <MappingFragment StoreEntitySet="Formaciones_X_Coches">
+          <EntitySetMapping Name="Formacion_X_Coche">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Formacion_X_Coche">
+              <MappingFragment StoreEntitySet="Formacion_X_Coche">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_Formacion" ColumnName="Id_Formacion" />
                 <ScalarProperty Name="Id_Coche" ColumnName="Id_Coche" />
@@ -727,9 +765,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Incidentes">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Incidentes">
-              <MappingFragment StoreEntitySet="Incidentes">
+          <EntitySetMapping Name="Incidente">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Incidente">
+              <MappingFragment StoreEntitySet="Incidente">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -738,59 +776,61 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Relaciones">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Relaciones">
-              <MappingFragment StoreEntitySet="Relaciones">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Id_Estacion_Anterior" ColumnName="Id_Estacion_Anterior" />
-                <ScalarProperty Name="Id_Estacion_Siguiente" ColumnName="Id_Estacion_Siguiente" />
-                <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
-                <ScalarProperty Name="Distancia" ColumnName="Distancia" />
-                <ScalarProperty Name="TiempoViaje" ColumnName="TiempoViaje" />
-                <ScalarProperty Name="Est_Sig_Es_Parada" ColumnName="Est_Sig_Es_Parada" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Servicios">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Servicios">
-              <MappingFragment StoreEntitySet="Servicios">
+          <EntitySetMapping Name="Servicio">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Servicio">
+              <MappingFragment StoreEntitySet="Servicio">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ProgramacionStr" ColumnName="ProgramacionStr" />
+                <ScalarProperty Name="Id_Estacion_Mantenimiento" ColumnName="Id_Estacion_Mantenimiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Servicios_X_Formaciones">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Servicios_X_Formaciones">
-              <MappingFragment StoreEntitySet="Servicios_X_Formaciones">
+          <EntitySetMapping Name="Servicio_X_Formacion">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Servicio_X_Formacion">
+              <MappingFragment StoreEntitySet="Servicio_X_Formacion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
                 <ScalarProperty Name="Id_Formacion" ColumnName="Id_Formacion" />
+                <ScalarProperty Name="CantFormaciones" ColumnName="CantFormaciones" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Simulaciones">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Simulaciones">
-              <MappingFragment StoreEntitySet="Simulaciones">
+          <EntitySetMapping Name="Simulacion">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Simulacion">
+              <MappingFragment StoreEntitySet="Simulacion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Tiempo_Inicial" ColumnName="Tiempo_Inicial" />
-                <ScalarProperty Name="Tiempo_Final" ColumnName="Tiempo_Final" />
+                <ScalarProperty Name="TiempoInicial" ColumnName="TiempoInicial" />
+                <ScalarProperty Name="TiempoFinal" ColumnName="TiempoFinal" />
                 <ScalarProperty Name="Id_Traza" ColumnName="Id_Traza" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Trazas">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Trazas">
-              <MappingFragment StoreEntitySet="Trazas">
+          <EntitySetMapping Name="Tramo">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Tramo">
+              <MappingFragment StoreEntitySet="Tramo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Estacion_Anterior" ColumnName="Id_Estacion_Anterior" />
+                <ScalarProperty Name="Id_Estacion_Siguiente" ColumnName="Id_Estacion_Siguiente" />
+                <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
+                <ScalarProperty Name="Distancia" ColumnName="Distancia" />
+                <ScalarProperty Name="VelocidadPromedio" ColumnName="VelocidadPromedio" />
+                <ScalarProperty Name="TiempoViaje" ColumnName="TiempoViaje" />
+                <ScalarProperty Name="EstSigEsParada" ColumnName="EstSigEsParada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Traza">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Traza">
+              <MappingFragment StoreEntitySet="Traza">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Trazas_X_Servicios">
-            <EntityTypeMapping TypeName="ffccSimulacion.Model.Entities.Trazas_X_Servicios">
-              <MappingFragment StoreEntitySet="Trazas_X_Servicios">
+          <EntitySetMapping Name="Traza_X_Servicio">
+            <EntityTypeMapping TypeName="SimuRails.Model.Entities.Traza_X_Servicio">
+              <MappingFragment StoreEntitySet="Traza_X_Servicio">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
                 <ScalarProperty Name="Id_Traza" ColumnName="Id_Traza" />

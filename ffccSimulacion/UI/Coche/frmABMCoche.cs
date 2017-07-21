@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ffccSimulacion.Model.Entities;
-using ffccSimulacion.Model.Simulacion;
+using SimuRails.Model.Entities;
+using SimuRails.Model.Simulacion;
 
-namespace ffccSimulacion.UI.ABMCoche
+namespace SimuRails.UI.ABMCoche
 {
     public partial class frmABMCoche : Form
     {
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
 
         public frmABMCoche()
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
             
             rndEsLocomotoraNo.Checked = true;
             cbxTipoConsumo.Enabled = false;

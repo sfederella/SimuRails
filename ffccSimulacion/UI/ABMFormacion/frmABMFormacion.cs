@@ -1,22 +1,22 @@
-﻿using ffccSimulacion.Model.Entities;
+﻿using SimuRails.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ffccSimulacion.UI.ABMFormacion
+namespace SimuRails.UI.ABMFormacion
 {
     public partial class frmABMFormacion : Form
     {
-        ffccSimulacionEntities context;
+        SimuRailsEntities context;
         private List<Formaciones_X_Coches> auxCochesFormacion;
 
         public frmABMFormacion()
         {
             InitializeComponent();
 
-            context = new ffccSimulacionEntities();
+            context = new SimuRailsEntities();
             auxCochesFormacion = new List<Formaciones_X_Coches>();
             CargarListasEstaciones();
             CargarListasFormaciones();
