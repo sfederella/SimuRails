@@ -1,25 +1,15 @@
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SimuRails.Model.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    public partial class Trazas
+    public partial class Traza
     {
         /*Estas propiedades no estan ni deben estar mapeadas en la base*/
-        public List<Servicios> ServiciosDisponibles
+        public List<Servicio> ServiciosDisponibles
         {
-            get { return Trazas_X_Servicios.Select(x => x.Servicios).ToList<Servicios>(); }
+            get { return Traza_X_Servicio.Select(x => x.Servicio).ToList<Servicio>(); }
         }
 
         /*public void LimpiarListaLINQParaPoderGuardar()
@@ -29,16 +19,16 @@ namespace SimuRails.Model.Entities
 
         public void ConfigurarLosServiciosDeLaTraza(int tiempoFinal)
         {
-            foreach (Trazas_X_Servicios ts in Trazas_X_Servicios)
-                ts.Servicios.ConfigurarServicio(tiempoFinal);
+            foreach (Traza_X_Servicio ts in Traza_X_Servicio)
+                ts.Servicio.ConfigurarServicio(tiempoFinal);
         }
 
-        public void AgregarServicio(Servicios unServicio)
+        public void AgregarServicio(Servicio unServicio)
         {
-            Trazas_X_Servicios ts = new Trazas_X_Servicios();
+            Traza_X_Servicio ts = new Traza_X_Servicio();
             ts.Id = this.Id;
-            ts.Servicios = unServicio;
-            Trazas_X_Servicios.Add(ts);
+            ts.Servicio = unServicio;
+            Traza_X_Servicio.Add(ts);
         }
     }
 }

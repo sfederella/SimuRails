@@ -16,7 +16,7 @@ namespace SimuRails.UI.ABMSimulacion
 
         SimuRailsEntities context;
 
-        public Simulaciones simulacionSeleccionada;
+        public Simulacion simulacionSeleccionada;
 
         public frmBuscarSimulacion()
         {
@@ -40,7 +40,7 @@ namespace SimuRails.UI.ABMSimulacion
             if (lBoxBuscSimList.SelectedIndex > -1)
             {
                 //Se selecciono algun item
-                simulacionSeleccionada = (Simulaciones)lBoxBuscSimList.Items[lBoxBuscSimList.SelectedIndex];
+                simulacionSeleccionada = (Simulacion)lBoxBuscSimList.Items[lBoxBuscSimList.SelectedIndex];
                 this.DialogResult = DialogResult.OK;
                 Close();
             }
@@ -55,7 +55,7 @@ namespace SimuRails.UI.ABMSimulacion
         {
             lBoxBuscSimList.Items.Clear();
 
-            context.Simulaciones.ToList().ForEach(x => { lBoxBuscSimList.Items.Add(x); });
+            context.Simulacion.ToList().ForEach(x => { lBoxBuscSimList.Items.Add(x); });
         }
 
         private void btnBuscarSimBorrar_Click_1(object sender, EventArgs e)
@@ -66,11 +66,11 @@ namespace SimuRails.UI.ABMSimulacion
 
                 try
                 {
-                    Simulaciones simulacionSeleccionada;
+                    Simulacion simulacionSeleccionada;
 
-                    simulacionSeleccionada = context.Simulaciones.Where(x => x.Id == ((Simulaciones)lBoxBuscSimList.SelectedItem).Id).ToList().FirstOrDefault();
+                    simulacionSeleccionada = context.Simulacion.Where(x => x.Id == ((Simulacion)lBoxBuscSimList.SelectedItem).Id).ToList().FirstOrDefault();
 
-                    context.Simulaciones.Remove(simulacionSeleccionada);
+                    context.Simulacion.Remove(simulacionSeleccionada);
 
                     context.SaveChanges();
 

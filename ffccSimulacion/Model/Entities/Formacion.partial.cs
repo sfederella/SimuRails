@@ -1,15 +1,14 @@
+using System.Collections.Generic;
+using SimuRails.Model.Simulacion;
+
 namespace SimuRails.Model.Entities
 {
-    using System.Collections.Generic;
-    using Simulacion;
-
-
-    public partial class Formaciones
+    public partial class Formacion
     {
-        private List<Coches> _listaCoches = new List<Coches>();
+        private List<Coche> _listaCoches = new List<Coche>();
 
         /*Esta propiedad no esta ni tiene que estar mapeada en la base*/
-        public List<Coches> ListaCoches
+        public List<Coche> ListaCoches
         {
             get { return _listaCoches; }
         }
@@ -18,36 +17,36 @@ namespace SimuRails.Model.Entities
         {
             if (_listaCoches.Count == 0)
             {
-                foreach (Formaciones_X_Coches fc in Formaciones_X_Coches)
+                foreach (Formacion_X_Coche fc in Formacion_X_Coche)
                     for (int i = 0; i < fc.VecesRepetido; i++)
-                        _listaCoches.Add(fc.Coches.ClonarCoche());
+                        _listaCoches.Add(fc.Coche.ClonarCoche());
             }
         }
 
-        public void agregarCoche(Coches coche, int vecesRepetido)
+        public void agregarCoche(Coche coche, int vecesRepetido)
         {
             /*Es necesario esto para poder guardar luego los nuevos coches que se vallan agregando a una formacion ya existente*/
-            Formaciones_X_Coches fc = new Formaciones_X_Coches();
-            fc.Coches = coche;
+            Formacion_X_Coche fc = new Formacion_X_Coche();
+            fc.Coche = coche;
             fc.VecesRepetido = vecesRepetido;
             fc.Id_Formacion = this.Id;
-            Formaciones_X_Coches.Add(fc);
+            Formacion_X_Coche.Add(fc);
 
             for (int i = 0; i < vecesRepetido; i++)
                 _listaCoches.Add(coche);
         }
 
         /*Esta funcion retorna una nueva instancia de formacion exactamente igual a si misma. CLONA LA FORMACION*/
-        public Formaciones ClonarFormacion()
+        public Formacion ClonarFormacion()
         {
-            return (Formaciones)this.MemberwiseClone();
+            return (Formacion)this.MemberwiseClone();
         }
 
         public int pasajerosSentados()
         {
             int pasajerosSentados = 0;
 
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
                 pasajerosSentados += c.PasajerosSentados;
 
             return pasajerosSentados;
@@ -57,7 +56,7 @@ namespace SimuRails.Model.Entities
         {
             int pasajerosParados = 0;
 
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
                 pasajerosParados += c.PasajerosParados;
 
             return pasajerosParados;
@@ -67,7 +66,7 @@ namespace SimuRails.Model.Entities
         {
             int cantidadAsientos = 0;
 
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
                 cantidadAsientos += c.CantidadAsientos;
 
             return cantidadAsientos;
@@ -77,7 +76,7 @@ namespace SimuRails.Model.Entities
         {
             int capacidadLegal = 0;
 
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
                 capacidadLegal += c.MaximoLegalPasajeros;
 
             return capacidadLegal;
@@ -87,7 +86,7 @@ namespace SimuRails.Model.Entities
         {
             int capacidadMaxima = 0;
 
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
                 capacidadMaxima += c.CapacidadMaximaPasajeros;
 
             return capacidadMaxima;
@@ -97,7 +96,7 @@ namespace SimuRails.Model.Entities
         {
             int exceso = genteASubir;
 
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
             {
                 c.DesenderPasajeros();
                 if (exceso > 0)
@@ -114,7 +113,7 @@ namespace SimuRails.Model.Entities
         public int TotalPasajerosEnFormacion()
         {
             int totalPasajeros = 0;
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
                 totalPasajeros += (c.PasajerosParados + c.PasajerosSentados);
 
             return totalPasajeros;
@@ -132,7 +131,7 @@ namespace SimuRails.Model.Entities
 
         public bool HayPasajerosParados()
         {
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
             {
                 if (c.PasajerosParados != 0)
                     return true;
@@ -144,7 +143,7 @@ namespace SimuRails.Model.Entities
         public int TotalPasajerosParados()
         {
             int total = 0;
-            foreach (Coches c in _listaCoches)
+            foreach (Coche c in _listaCoches)
             {
                 if (c.PasajerosParados != 0)
                     total += c.PasajerosParados;
@@ -156,9 +155,9 @@ namespace SimuRails.Model.Entities
         public double consumoDiesel(ResultadoFormacion resultadoFormacion)
         {
             double consumoDiesel = 0;
-            foreach (Coches coche in _listaCoches)
+            foreach (Coche coche in _listaCoches)
             {
-                if (coche.EsLocomotora == 1)
+                if (coche.EsLocomotora == true)
                 {
                     if (coche.TipoConsumo == (int)TipoConsumo.Disel)
                     {
@@ -173,9 +172,9 @@ namespace SimuRails.Model.Entities
         public double consumoElectrico(ResultadoFormacion resultadoFormacion)
         {
             double consumoElectrico = 0;
-            foreach (Coches coche in _listaCoches)
+            foreach (Coche coche in _listaCoches)
             {
-                if (coche.EsLocomotora == 1)
+                if (coche.EsLocomotora == true)
                 {
                     if (coche.TipoConsumo == (int)TipoConsumo.Electrico)
                     {

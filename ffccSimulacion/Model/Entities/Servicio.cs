@@ -25,6 +25,7 @@ namespace SimuRails.Model.Entities
         public int Id { get; set; }
         public string Nombre { get; set; }
         public Nullable<int> Id_Estacion_Mantenimiento { get; set; }
+        public string ProgramacionStr { get; set; }
     
         public virtual Estacion Estacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

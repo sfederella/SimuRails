@@ -70,6 +70,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Id_Estacion_Mantenimiento" Type="int" />
+          <Property Name="ProgramacionStr" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Servicio_X_Formacion">
           <Key>
@@ -422,6 +423,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id_Estacion_Mantenimiento" Type="Int32" />
+          <Property Name="ProgramacionStr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Estacion" Relationship="Self.FK_Servicio_Estacion" FromRole="Servicio" ToRole="Estacion" />
           <NavigationProperty Name="Servicio_X_Formacion" Relationship="Self.FK_Servicios_X_Formaciones__Servicio" FromRole="Servicio" ToRole="Servicio_X_Formacion" />
           <NavigationProperty Name="Tramo" Relationship="Self.FK_Tramo_Servicio" FromRole="Servicio" ToRole="Tramo" />
@@ -782,6 +784,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id_Estacion_Mantenimiento" ColumnName="Id_Estacion_Mantenimiento" />
+                <ScalarProperty Name="ProgramacionStr" ColumnName="ProgramacionStr" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

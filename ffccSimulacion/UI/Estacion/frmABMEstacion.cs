@@ -12,7 +12,7 @@ namespace SimuRails.UI.ABMEstacion
     {
         SimuRailsEntities context;
 
-        Estaciones estacionSeleccionada;
+        Estacion estacionSeleccionada;
 
         public frmABMEstacion()
         {
@@ -101,7 +101,7 @@ namespace SimuRails.UI.ABMEstacion
 
             clbModIncidentes.Items.Clear();
 
-            context.Incidentes.ToList().ForEach(x => { clbIncidentes.Items.Add(x); clbModIncidentes.Items.Add(x); });
+            context.Incidente.ToList().ForEach(x => { clbIncidentes.Items.Add(x); clbModIncidentes.Items.Add(x); });
         }
 
         private void cargarEstaciones()
@@ -112,7 +112,7 @@ namespace SimuRails.UI.ABMEstacion
 
             lstCreEstaciones.Items.Clear();
 
-            context.Estaciones.ToList().ForEach(x => { lstModEstaciones.Items.Add(x); lstEliEstaciones.Items.Add(x); lstCreEstaciones.Items.Add(x); });
+            context.Estacion.ToList().ForEach(x => { lstModEstaciones.Items.Add(x); lstEliEstaciones.Items.Add(x); lstCreEstaciones.Items.Add(x); });
         }
 
         #endregion
@@ -161,7 +161,7 @@ namespace SimuRails.UI.ABMEstacion
             {
                 try
                 {
-                    estacionSeleccionada = (Estaciones)lstModEstaciones.SelectedItem;
+                    estacionSeleccionada = (Estacion)lstModEstaciones.SelectedItem;
 
                     estacionSeleccionada.Nombre = txtEstModNombre.Text;
 
@@ -172,10 +172,10 @@ namespace SimuRails.UI.ABMEstacion
                     estacionSeleccionada.TipoFDP = cmbEstModFdp.SelectedIndex;
 
                     //borro todas los incidente asignados a la estacion
-                    context.Estaciones_X_Incidentes.Where(x => x.Id_Estacion == estacionSeleccionada.Id).ToList().ForEach(y => context.Estaciones_X_Incidentes.Remove(y));
+                    context.Estacion_X_Incidente.Where(x => x.Id_Estacion == estacionSeleccionada.Id).ToList().ForEach(y => context.Estacion_X_Incidente.Remove(y));
 
                     //asigo la configuracion de estaciones del checklistbox
-                    foreach (Incidentes i in clbModIncidentes.CheckedItems)
+                    foreach (Incidente i in clbModIncidentes.CheckedItems)
                     {
                         estacionSeleccionada.AgregarIncidente(i);
                     }
@@ -213,7 +213,7 @@ namespace SimuRails.UI.ABMEstacion
             {
                 errorMsj += "Nombre: Valor Incompleto ó Incorrecto.\n";
             }
-            else if (context.Estaciones.Where(x => x.Nombre == txtEstCreNombre.Text).Count() > 1)
+            else if (context.Estacion.Where(x => x.Nombre == txtEstCreNombre.Text).Count() > 1)
             {
                 errorMsj += "La estación existe en el sistema, ingrese otra.\n";
             }
@@ -247,7 +247,7 @@ namespace SimuRails.UI.ABMEstacion
             {
                 try
                 {
-                    Estaciones nuevaEstacion = new Estaciones();
+                    Estacion nuevaEstacion = new Estacion();
 
                     nuevaEstacion.Nombre = txtEstCreNombre.Text;
 
@@ -257,12 +257,12 @@ namespace SimuRails.UI.ABMEstacion
 
                     nuevaEstacion.TipoFDP = cmbEstCreFdp.SelectedIndex;
 
-                    foreach (Incidentes i in clbIncidentes.CheckedItems)
+                    foreach (Incidente i in clbIncidentes.CheckedItems)
                     {
                         nuevaEstacion.AgregarIncidente(i);
                     }
 
-                    context.Estaciones.Add(nuevaEstacion);
+                    context.Estacion.Add(nuevaEstacion);
 
                     context.SaveChanges();
 
@@ -289,13 +289,13 @@ namespace SimuRails.UI.ABMEstacion
         private void borrarEstacion()
         {
             string errorMsj = "";
-            estacionSeleccionada = (Estaciones)lstEliEstaciones.SelectedItem;
+            estacionSeleccionada = (Estacion)lstEliEstaciones.SelectedItem;
 
             if (lstEliEstaciones.SelectedItem == null)
             {
                 errorMsj += "No se ha seleccionado ninguna estación para eliminar.\n";
             }
-            else if ((context.Relaciones.Any(x => x.Id_Estacion_Anterior == estacionSeleccionada.Id)) || (context.Relaciones.Any(y => y.Id_Estacion_Siguiente == estacionSeleccionada.Id)))
+            else if ((context.Tramo.Any(x => x.Id_Estacion_Anterior == estacionSeleccionada.Id)) || (context.Tramo.Any(y => y.Id_Estacion_Siguiente == estacionSeleccionada.Id)))
             {
                 errorMsj += "La estación no puede borrarse porque pertenece a un servicio.\n";
             }
@@ -306,12 +306,12 @@ namespace SimuRails.UI.ABMEstacion
                 {
                     if (MessageBox.Show("La estación se eliminará de manera permanente. ¿Desea continuar?", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
-                    estacionSeleccionada = (Estaciones)lstEliEstaciones.SelectedItem;
+                    estacionSeleccionada = (Estacion)lstEliEstaciones.SelectedItem;
 
                     //borro todos los incidentes relacionados
-                    context.Estaciones_X_Incidentes.Where(x => x.Id_Estacion == estacionSeleccionada.Id).ToList().ForEach(y => context.Estaciones_X_Incidentes.Remove(y));
+                    context.Estacion_X_Incidente.Where(x => x.Id_Estacion == estacionSeleccionada.Id).ToList().ForEach(y => context.Estacion_X_Incidente.Remove(y));
 
-                    context.Estaciones.Remove(estacionSeleccionada);
+                    context.Estacion.Remove(estacionSeleccionada);
 
                     context.SaveChanges();
 
@@ -357,7 +357,7 @@ namespace SimuRails.UI.ABMEstacion
             {
                 habilitarModificar();
 
-                estacionSeleccionada = (Estaciones)lstModEstaciones.SelectedItem;
+                estacionSeleccionada = (Estacion)lstModEstaciones.SelectedItem;
 
                 txtEstModNombre.Text = estacionSeleccionada.Nombre;
 
@@ -373,7 +373,7 @@ namespace SimuRails.UI.ABMEstacion
                     clbModIncidentes.SetItemChecked(i, false);
                 }
 
-                foreach (Incidentes i in estacionSeleccionada.ListaIncidentes)
+                foreach (Incidente i in estacionSeleccionada.ListaIncidentes)
                 {
                     clbModIncidentes.SetItemChecked(clbModIncidentes.Items.IndexOf(i), true);
                 }
@@ -467,7 +467,7 @@ namespace SimuRails.UI.ABMEstacion
             if (!String.IsNullOrEmpty(buscarEstacion.Text) && Util.EsAlfaNumerico(buscarEstacion.Text))
             {
                 resultados.Items.Clear();
-                context.Estaciones.Where(x => x.Nombre.Contains(buscarEstacion.Text)).ToList().ForEach(y => resultados.Items.Add(y));
+                context.Estacion.Where(x => x.Nombre.Contains(buscarEstacion.Text)).ToList().ForEach(y => resultados.Items.Add(y));
             }
             else
             {
@@ -480,12 +480,12 @@ namespace SimuRails.UI.ABMEstacion
         {
             if (lstEliEstaciones.SelectedIndex > -1)
             {
-                Servicios s;
+                Servicio s;
                 lstEstEliServicios.Items.Clear();
-                List<Relaciones> se = context.Relaciones.Where(x => x.Id_Estacion_Anterior == ((Estaciones)lstEliEstaciones.SelectedItem).Id || x.Id_Estacion_Siguiente == ((Estaciones)lstEliEstaciones.SelectedItem).Id).ToList();
+                List<Tramo> se = context.Tramo.Where(x => x.Id_Estacion_Anterior == ((Estacion)lstEliEstaciones.SelectedItem).Id || x.Id_Estacion_Siguiente == ((Estacion)lstEliEstaciones.SelectedItem).Id).ToList();
                 foreach (var serv in se)
                 {
-                    s = context.Servicios.Where(x => x.Id == serv.Id_Servicio).FirstOrDefault();
+                    s = context.Servicio.Where(x => x.Id == serv.Id_Servicio).FirstOrDefault();
                     if (lstEstEliServicios.FindStringExact(s.Nombre) < 0)
                     {
                         lstEstEliServicios.Items.Add(s);

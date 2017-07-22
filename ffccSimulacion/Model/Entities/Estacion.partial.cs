@@ -1,22 +1,22 @@
+using System.Collections.Generic;
+using System.Linq;
+using SimuRails.Model.Simulacion;
+
 namespace SimuRails.Model.Entities
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using SimuRails.Model.Simulacion;
-
-    public partial class Estaciones
+    public partial class Estacion
     {
 
-        public Estaciones(int id, string nombre)
+        public Estacion(int id, string nombre)
         {
             this.Id = id;
             this.Nombre = nombre;
             this.TiempoComprometido = 0;
             this.UltimaAtencion = 0;
             this.GenteEsperando = 0;
-            this.Estaciones_X_Incidentes = new HashSet<Estaciones_X_Incidentes>();
-            this.Relaciones = new HashSet<Relaciones>();
-            this.Relaciones1 = new HashSet<Relaciones>();
+            this.Estacion_X_Incidente = new HashSet<Estacion_X_Incidente>();
+            this.Tramo = new HashSet<Tramo>();
+            this.Tramo1 = new HashSet<Tramo>();
         }
 
         //private List<Relaciones> _anteriores = new List<Relaciones>();
@@ -57,18 +57,18 @@ namespace SimuRails.Model.Entities
             get { return _siguientes; }
         }*/
 
-        public List<Incidentes> ListaIncidentes
+        public List<Incidente> ListaIncidentes
         {
-            get { return Estaciones_X_Incidentes.Select(x => x.Incidentes).ToList<Incidentes>(); }
+            get { return Estacion_X_Incidente.Select(x => x.Incidente).ToList<Incidente>(); }
         }
 
 
-        public void AgregarIncidente(Incidentes i)
+        public void AgregarIncidente(Incidente i)
         {
-            Estaciones_X_Incidentes ie = new Estaciones_X_Incidentes();
-            ie.Incidentes = i;
+            Estacion_X_Incidente ie = new Estacion_X_Incidente();
+            ie.Incidente = i;
             ie.Id_Estacion = this.Id;
-            Estaciones_X_Incidentes.Add(ie);
+            Estacion_X_Incidente.Add(ie);
         }
 
         /*public void agregarRelacionAnterior(Relaciones relacion)
@@ -82,7 +82,7 @@ namespace SimuRails.Model.Entities
         }*/
 
         /*Retorna cual fue el tiempo de atencion de la formacion*/
-        public int atenderFormacion(Formaciones formacion, ref int tiempoLlegada)
+        public int atenderFormacion(Formacion formacion, ref int tiempoLlegada)
         {
             //CALCULO LA LLEGADA
             if (_tiempoComprometido < tiempoLlegada)

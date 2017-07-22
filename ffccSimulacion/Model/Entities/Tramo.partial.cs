@@ -3,14 +3,14 @@ namespace SimuRails.Model.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Relaciones
+    public partial class Tramo
     {
-        public Relaciones ClonarRelacion()
+        public Tramo ClonarRelacion()
         {
-            return (Relaciones)this.MemberwiseClone();
+            return (Tramo)this.MemberwiseClone();
         }
 
-        public bool relaciona(Estaciones nodoInicial, Estaciones nodoFinal)
+        public bool relaciona(Estacion nodoInicial, Estacion nodoFinal)
         {
             //TODO Revisar si la relacion es bidireccional.
             if ((Id_Estacion_Anterior == nodoInicial.Id && Id_Estacion_Siguiente == nodoFinal.Id) || (Id_Estacion_Anterior == nodoFinal.Id && Id_Estacion_Siguiente == nodoInicial.Id))
@@ -23,7 +23,7 @@ namespace SimuRails.Model.Entities
         public int demoraPorAccidentes()
         {
             int totalDemora = 0;
-            foreach (Incidentes incidentePosible in Estaciones1.ListaIncidentes)
+            foreach (Incidente incidentePosible in Estacion1.ListaIncidentes)
             {
                 if (incidentePosible.Ocurre())
                 {

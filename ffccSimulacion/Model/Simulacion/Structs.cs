@@ -6,7 +6,7 @@ namespace SimuRails.Model.Simulacion
 {
     public struct Parada
     {
-        public Estaciones nodo;
+        public Estacion nodo;
         public bool para;
     }
 

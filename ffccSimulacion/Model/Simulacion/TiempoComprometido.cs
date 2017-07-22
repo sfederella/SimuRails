@@ -10,17 +10,17 @@ namespace SimuRails.Model.Simulacion
     {
         private int _tiempoInicial;
         private int _tiempoFinal;
-        private Trazas _traza;
+        private Traza _traza;
         private frmBarraProgreso _barraProgreso;
         /*Este diccionario se utiliza para mantener de manera comun los tiempos comprometidos, la gentes esperando y la hora de ultima atencion de todas las
          estaciones que existan en la simulacion. De otra forma cada estacion es una instancia distinta y por lo tanto sus campos son siempre 0 aunque se trate de la misma 
          estacion. Preguntar a Pablo*/
 
         //La clave que se utiliza es el id de la estacion
-        private Dictionary<int, Estaciones> _estaciones_TC = new Dictionary<int, Estaciones>();
+        private Dictionary<int, Estacion> _estaciones_TC = new Dictionary<int, Estacion>();
         private List<ResultadoServicio> _resultadosServicios = new List<ResultadoServicio>();
 
-        public TiempoComprometido(int tiempoInicial, int tiempoFinal, Trazas unaTraza, frmBarraProgreso barraProgreso)
+        public TiempoComprometido(int tiempoInicial, int tiempoFinal, Traza unaTraza, frmBarraProgreso barraProgreso)
         {
             TiempoInicial = tiempoInicial;
             TiempoFinal = tiempoFinal;
@@ -43,7 +43,7 @@ namespace SimuRails.Model.Simulacion
             set { _tiempoFinal = value; }
         }
 
-        public Trazas Traza
+        public Traza Traza
         {
             get { return _traza; }
             set { _traza = value; }
@@ -59,8 +59,8 @@ namespace SimuRails.Model.Simulacion
         {
             //EJECUCION
             int tiempoActual;
-            Formaciones formacionActual;
-            Servicios servicioActual;
+            Formacion formacionActual;
+            Servicio servicioActual;
             int inicioFormacion;
 
             cargarServicios();
@@ -80,14 +80,14 @@ namespace SimuRails.Model.Simulacion
             while (tiempoActual < TiempoFinal)
             {
                 // Inicializo la variable que recorre el puntero de nodos. Empieza en la terminal.
-                Estaciones estacionActual = servicioActual.Desde;
+                Estacion estacionActual = servicioActual.Desde;
                 //El tren sale a la hora indicada en la programacion del servicio.
                 int tiempoSalidaProximaEstacion = tiempoActual;
                 //TODO atencion en la terminal.
 
                 ResultadoFormacion result = new ResultadoFormacion();
                 result.id_formacion = formacionActual.Id;
-                result.nombreFormacion = formacionActual.NombreFormacion;
+                result.nombreFormacion = formacionActual.Nombre;
 
                 ResultadoServicio resultServicioActual = null;
 
@@ -106,10 +106,10 @@ namespace SimuRails.Model.Simulacion
                 {
                                         
                     //Obtengo el camino a recorrer hasta la próxima estación.
-                    Relaciones relacionActual = servicioActual.Relaciones.Where(x => x.Id_Estacion_Anterior == estacionActual.Id).First();
+                    Tramo relacionActual = servicioActual.Tramo.Where(x => x.Id_Estacion_Anterior == estacionActual.Id).First();
 
                     //Busco la siguiente estación en el recorrido.
-                    Estaciones siguienteEstacion = relacionActual.Estaciones1;
+                    Estacion siguienteEstacion = relacionActual.Estacion1;
 
                     //La relacion me indica la distancia del viaje
                     result.distanciaTotalRecorrida += relacionActual.Distancia;
@@ -200,7 +200,7 @@ namespace SimuRails.Model.Simulacion
 
         private void cargarServicios()
         {
-            foreach(Servicios servicio in Traza.ServiciosDisponibles)
+            foreach(Servicio servicio in Traza.ServiciosDisponibles)
             {
                 int cantidadEstaciones = 0;
                 foreach(Parada parada in servicio.Paradas)
@@ -212,12 +212,12 @@ namespace SimuRails.Model.Simulacion
             }
         }
 
-        private void actualizarSiguienteServicio(out int siguienteSalida, out Servicios siguienteServicio)
+        private void actualizarSiguienteServicio(out int siguienteSalida, out Servicio siguienteServicio)
         {
             siguienteServicio = Traza.ServiciosDisponibles[0];
             siguienteSalida = siguienteServicio.proximoHorarioSalida();
             int auxHorarioSalida;
-            foreach (Servicios srv in Traza.ServiciosDisponibles)
+            foreach (Servicio srv in Traza.ServiciosDisponibles)
             {
                 auxHorarioSalida = srv.proximoHorarioSalida();
                 if (auxHorarioSalida < siguienteSalida)

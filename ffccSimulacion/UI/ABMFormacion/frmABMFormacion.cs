@@ -10,14 +10,14 @@ namespace SimuRails.UI.ABMFormacion
     public partial class frmABMFormacion : Form
     {
         SimuRailsEntities context;
-        private List<Formaciones_X_Coches> auxCochesFormacion;
+        private List<Formacion_X_Coche> auxCochesFormacion;
 
         public frmABMFormacion()
         {
             InitializeComponent();
 
             context = new SimuRailsEntities();
-            auxCochesFormacion = new List<Formaciones_X_Coches>();
+            auxCochesFormacion = new List<Formacion_X_Coche>();
             CargarListasEstaciones();
             CargarListasFormaciones();
             btnAgregarFormacion.Enabled = false;
@@ -26,7 +26,7 @@ namespace SimuRails.UI.ABMFormacion
 
         private void CargarListasEstaciones()
         {
-            foreach (Coches c in context.Coches)
+            foreach (Coche c in context.Coche)
             {
                 lbxCochesExistentes.Items.Add(c);
                 lbxCochesExistentesMod.Items.Add(c);
@@ -35,7 +35,7 @@ namespace SimuRails.UI.ABMFormacion
 
         private void CargarListasFormaciones()
         {
-            foreach(Formaciones f in context.Formaciones)
+            foreach(Formacion f in context.Formacion)
             {
                 lbxFormacionesEliminar.Items.Add(f);
                 lbxFormacionesModificar.Items.Add(f);
@@ -45,16 +45,16 @@ namespace SimuRails.UI.ABMFormacion
         {
             if (tabControl1.SelectedTab == tabCrearFormacion)
             {
-                txtConsumoFormacionParado.Text = auxCochesFormacion.Select(x => x.Coches.ConsumoParado * x.VecesRepetido).Sum().ToString();
-                txtConsumoFormacionMov.Text = auxCochesFormacion.Select(x => x.Coches.ConsumoMovimiento * x.VecesRepetido).Sum().ToString();
+                txtConsumoFormacionParado.Text = auxCochesFormacion.Select(x => x.Coche.ConsumoParado * x.VecesRepetido).Sum().ToString();
+                txtConsumoFormacionMov.Text = auxCochesFormacion.Select(x => x.Coche.ConsumoMovimiento * x.VecesRepetido).Sum().ToString();
                 txtTotalCoches.Text = auxCochesFormacion.Select(x => x.VecesRepetido).Sum().ToString();
-                txtTotalAsientos.Text = auxCochesFormacion.Select(x => x.Coches.CantidadAsientos * x.VecesRepetido).Sum().ToString();
-                txtMaxPasajerosLegal.Text = auxCochesFormacion.Select(x => x.Coches.MaximoLegalPasajeros * x.VecesRepetido).Sum().ToString();
-                txtMaxRealPasajeros.Text = auxCochesFormacion.Select(x => x.Coches.CapacidadMaximaPasajeros * x.VecesRepetido).Sum().ToString();
+                txtTotalAsientos.Text = auxCochesFormacion.Select(x => x.Coche.CantidadAsientos * x.VecesRepetido).Sum().ToString();
+                txtMaxPasajerosLegal.Text = auxCochesFormacion.Select(x => x.Coche.MaximoLegalPasajeros * x.VecesRepetido).Sum().ToString();
+                txtMaxRealPasajeros.Text = auxCochesFormacion.Select(x => x.Coche.CapacidadMaximaPasajeros * x.VecesRepetido).Sum().ToString();
             }
             else if(tabControl1.SelectedTab == tabModificarFormacion)
             {
-                Formaciones f = (Formaciones)lbxFormacionesModificar.SelectedItem;
+                Formacion f = (Formacion)lbxFormacionesModificar.SelectedItem;
                 if (f == null)
                 {
                     txtConsumoFormacionMovMod.Text = "0";
@@ -66,12 +66,12 @@ namespace SimuRails.UI.ABMFormacion
                     return;
                 }
 
-                txtConsumoFormacionMovMod.Text = f.Formaciones_X_Coches.Select(x => x.Coches.ConsumoMovimiento * x.VecesRepetido).Sum().ToString();
-                txtConsumoFormacionParadoMod.Text = f.Formaciones_X_Coches.Select(x => x.Coches.ConsumoParado * x.VecesRepetido).Sum().ToString();
-                txtTotalCochesMod.Text = f.Formaciones_X_Coches.Select(x => x.VecesRepetido).Sum().ToString();
-                txtTotalAsientosMod.Text = f.Formaciones_X_Coches.Select(x => x.Coches.CantidadAsientos * x.VecesRepetido).Sum().ToString();
-                txtMaximoPasajerlosLegalMod.Text = f.Formaciones_X_Coches.Select(x => x.Coches.MaximoLegalPasajeros * x.VecesRepetido).Sum().ToString();
-                txtMaximoPasajerosRealMod.Text = f.Formaciones_X_Coches.Select(x => x.Coches.CapacidadMaximaPasajeros * x.VecesRepetido).Sum().ToString();
+                txtConsumoFormacionMovMod.Text = f.Formacion_X_Coche.Select(x => x.Coche.ConsumoMovimiento * x.VecesRepetido).Sum().ToString();
+                txtConsumoFormacionParadoMod.Text = f.Formacion_X_Coche.Select(x => x.Coche.ConsumoParado * x.VecesRepetido).Sum().ToString();
+                txtTotalCochesMod.Text = f.Formacion_X_Coche.Select(x => x.VecesRepetido).Sum().ToString();
+                txtTotalAsientosMod.Text = f.Formacion_X_Coche.Select(x => x.Coche.CantidadAsientos * x.VecesRepetido).Sum().ToString();
+                txtMaximoPasajerlosLegalMod.Text = f.Formacion_X_Coche.Select(x => x.Coche.MaximoLegalPasajeros * x.VecesRepetido).Sum().ToString();
+                txtMaximoPasajerosRealMod.Text = f.Formacion_X_Coche.Select(x => x.Coche.CapacidadMaximaPasajeros * x.VecesRepetido).Sum().ToString();
             }
         }
 
@@ -83,7 +83,7 @@ namespace SimuRails.UI.ABMFormacion
             txtNombreFormacion.Text = "";
             txtCantidadCoches.Text = "";
             lbxCochesFormacion.Items.Clear();
-            auxCochesFormacion = new List<Formaciones_X_Coches>();
+            auxCochesFormacion = new List<Formacion_X_Coche>();
             lbxCochesExistentes.SelectedIndex = -1;
             txtCantidadCoches.Enabled = true;
             RecalcularTotalesFormacion();
@@ -113,7 +113,7 @@ namespace SimuRails.UI.ABMFormacion
 
         private void btnAgregarFormacion_Click(object sender, EventArgs e)
         {
-            Coches unCoche = (Coches)lbxCochesExistentes.SelectedItem;
+            Coche unCoche = (Coche)lbxCochesExistentes.SelectedItem;
 
             if (unCoche == null) return;
 
@@ -129,8 +129,8 @@ namespace SimuRails.UI.ABMFormacion
 
             if (String.IsNullOrEmpty(errorMsj))
             {
-                Formaciones_X_Coches fc = new Formaciones_X_Coches();
-                fc.Coches = unCoche;
+                Formacion_X_Coche fc = new Formacion_X_Coche();
+                fc.Coche = unCoche;
                 fc.Id_Coche = unCoche.Id;
                 fc.VecesRepetido = Convert.ToInt32(txtCantidadCoches.Text);
                 auxCochesFormacion.Add(fc);
@@ -149,7 +149,7 @@ namespace SimuRails.UI.ABMFormacion
 
             if (String.IsNullOrEmpty(errorMsj))
             {
-                Coches unCoche = (Coches)lbxCochesFormacion.SelectedItem;
+                Coche unCoche = (Coche)lbxCochesFormacion.SelectedItem;
                 auxCochesFormacion.Remove(auxCochesFormacion.Where(x => x.Id_Coche == unCoche.Id).First());
                 lbxCochesFormacion.Items.Remove(unCoche);
                 RecalcularTotalesFormacion();
@@ -169,7 +169,7 @@ namespace SimuRails.UI.ABMFormacion
 
         private void CrearNuevaFormacion()
         {
-            int cantidadLocomotoras = auxCochesFormacion.Where(x => x.Coches.EsLocomotora == 1).Sum(x => x.VecesRepetido);
+            int cantidadLocomotoras = auxCochesFormacion.Where(x => x.Coche.EsLocomotora == true).Sum(x => x.VecesRepetido);
             string errorMsj = "";
 
             if (cantidadLocomotoras > 1)
@@ -179,7 +179,7 @@ namespace SimuRails.UI.ABMFormacion
 
             if (!Util.EsAlfaNumerico(txtNombreFormacion.Text))
                 errorMsj += "Nombre: Incompleto/Incorrecto.\n";
-            else if (context.Formaciones.Where(x => x.NombreFormacion == txtNombreFormacion.Text).Count() > 0)
+            else if (context.Formacion.Where(x => x.Nombre == txtNombreFormacion.Text).Count() > 0)
                 errorMsj += "Nombre: ya existe una formación con el mismo nombre.\n";
 
             if(auxCochesFormacion.Count == 0)
@@ -192,10 +192,10 @@ namespace SimuRails.UI.ABMFormacion
             {
                 try
                 {
-                    Formaciones nuevaFormacion = new Formaciones();
-                    nuevaFormacion.NombreFormacion = txtNombreFormacion.Text;
-                    nuevaFormacion.Formaciones_X_Coches = auxCochesFormacion;
-                    context.Formaciones.Add(nuevaFormacion);
+                    Formacion nuevaFormacion = new Formacion();
+                    nuevaFormacion.Nombre = txtNombreFormacion.Text;
+                    nuevaFormacion.Formacion_X_Coche = auxCochesFormacion;
+                    context.Formacion.Add(nuevaFormacion);
                     context.SaveChanges();
                     MessageBox.Show("La formación se ha creado exitosamente.\n");
                     LimpiarTabCrearFormacion();
@@ -212,9 +212,9 @@ namespace SimuRails.UI.ABMFormacion
 
         private void GuardarModificacionesFormacion()
         {
-            Formaciones formacionSeleccionada = (Formaciones)lbxFormacionesModificar.SelectedItem;
+            Formacion formacionSeleccionada = (Formacion)lbxFormacionesModificar.SelectedItem;
             string errorMsj = "";
-            List<Formaciones_X_Coches> auxFormacionCochesMod = new List<Formaciones_X_Coches>();
+            List<Formacion_X_Coche> auxFormacionCochesMod = new List<Formacion_X_Coche>();
 
             if (formacionSeleccionada == null)
             {
@@ -222,12 +222,12 @@ namespace SimuRails.UI.ABMFormacion
                 return;
             }
 
-            List<string> nombresFormaciones = context.Formaciones.Where(x => x.Id != formacionSeleccionada.Id).Select(x => x.NombreFormacion).ToList<string>();
+            List<string> nombresFormaciones = context.Formacion.Where(x => x.Id != formacionSeleccionada.Id).Select(x => x.Nombre).ToList<string>();
 
-            foreach (Formaciones_X_Coches fc in lbxCochesFormacionMod.Items)
+            foreach (Formacion_X_Coche fc in lbxCochesFormacionMod.Items)
                 auxFormacionCochesMod.Add(fc);
 
-            int cantidadLocomotoras = auxFormacionCochesMod.Where(x => x.Coches.EsLocomotora == 1).Sum(x => x.VecesRepetido);
+            int cantidadLocomotoras = auxFormacionCochesMod.Where(x => x.Coche.EsLocomotora == true).Sum(x => x.VecesRepetido);
 
             if (cantidadLocomotoras > 1)
             {
@@ -248,7 +248,7 @@ namespace SimuRails.UI.ABMFormacion
             {
                 try
                 {
-                    formacionSeleccionada.NombreFormacion = txtNombreFormacionMod.Text;
+                    formacionSeleccionada.Nombre = txtNombreFormacionMod.Text;
                     /*Los coches se fueron guardando en la formacion en el momento que el coche se agrega a la lista dentro del metodo "btnAgregarCocheMod_Click()"
                      o en "btnEliminarCocheMod_Click()"*/
 
@@ -277,7 +277,7 @@ namespace SimuRails.UI.ABMFormacion
 
         private void lbxCochesFormacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Coches unCoche = (Coches)lbxCochesFormacion.SelectedItem;
+            Coche unCoche = (Coche)lbxCochesFormacion.SelectedItem;
             if (unCoche == null) return;
             txtCantidadCoches.Text = auxCochesFormacion.Where(x => x.Id_Coche == unCoche.Id).First().VecesRepetido.ToString();
             txtCantidadCoches.Enabled = false;
@@ -298,11 +298,11 @@ namespace SimuRails.UI.ABMFormacion
         private void btnBorrarFormacion_Click(object sender, EventArgs e)
         {
             string errorMsj = "";
-            Formaciones unaFormacion = (Formaciones)lbxFormacionesEliminar.SelectedItem;
+            Formacion unaFormacion = (Formacion)lbxFormacionesEliminar.SelectedItem;
             
             if (lbxFormacionesEliminar.SelectedItem == null)
                 errorMsj += "No se ha seleccionado ninguna formación para eliminar.\n";
-            else if (context.Servicios_X_Formaciones.Where(x => x.Formaciones.Id == unaFormacion.Id).Count() != 0)
+            else if (context.Servicio_X_Formacion.Where(x => x.Formacion.Id == unaFormacion.Id).Count() != 0)
                     errorMsj += "La formación no puede borrarse porque pertenece a un servicio.\n";
 
             if (string.IsNullOrEmpty(errorMsj))
@@ -310,12 +310,12 @@ namespace SimuRails.UI.ABMFormacion
                 try
                 {
                     if (MessageBox.Show("La formación se eliminará de manera permanente.¿Desea continuar?", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
-                    Formaciones f = (Formaciones)lbxFormacionesEliminar.SelectedItem;
+                    Formacion f = (Formacion)lbxFormacionesEliminar.SelectedItem;
 
-                    foreach (Formaciones_X_Coches fc in context.Formaciones_X_Coches.Where(x => x.Id_Formacion == f.Id))
-                        context.Formaciones_X_Coches.Remove(fc);
+                    foreach (Formacion_X_Coche fc in context.Formacion_X_Coche.Where(x => x.Id_Formacion == f.Id))
+                        context.Formacion_X_Coche.Remove(fc);
                     
-                    context.Formaciones.Remove(f);
+                    context.Formacion.Remove(f);
                     context.SaveChanges();
 
                     lbxFormacionesEliminar.Items.Remove(f);
@@ -345,10 +345,10 @@ namespace SimuRails.UI.ABMFormacion
                 
                 txtCantidadCochesMod.Text = "";
 
-                Formaciones unaFormacion = (Formaciones)lbxFormacionesModificar.SelectedItem;
-                txtNombreFormacionMod.Text = unaFormacion.NombreFormacion;
+                Formacion unaFormacion = (Formacion)lbxFormacionesModificar.SelectedItem;
+                txtNombreFormacionMod.Text = unaFormacion.Nombre;
                 lbxCochesFormacionMod.Items.Clear();
-                foreach (Formaciones_X_Coches fc in unaFormacion.Formaciones_X_Coches)
+                foreach (Formacion_X_Coche fc in unaFormacion.Formacion_X_Coche)
                     lbxCochesFormacionMod.Items.Add(fc);
                 RecalcularTotalesFormacion();
             }
@@ -356,7 +356,7 @@ namespace SimuRails.UI.ABMFormacion
 
         private void lbxCochesFormacionMod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Formaciones_X_Coches fc = (Formaciones_X_Coches)lbxCochesFormacionMod.SelectedItem;
+            Formacion_X_Coche fc = (Formacion_X_Coche)lbxCochesFormacionMod.SelectedItem;
             if (fc != null)
             {
                 txtCantidadCochesMod.Text = fc.VecesRepetido.ToString();
@@ -381,8 +381,8 @@ namespace SimuRails.UI.ABMFormacion
             if (lbxCochesExistentesMod.SelectedIndex > -1)
             {
                 string errorMsj = "";
-                Coches cocheSeleccionado = (Coches)lbxCochesExistentesMod.SelectedItem;
-                Formaciones formacionSeleccionada = (Formaciones)lbxFormacionesModificar.SelectedItem;
+                Coche cocheSeleccionado = (Coche)lbxCochesExistentesMod.SelectedItem;
+                Formacion formacionSeleccionada = (Formacion)lbxFormacionesModificar.SelectedItem;
 
                 if (formacionSeleccionada == null)
                     errorMsj += "No se seleccionó ninguna formación para ser modificada.\n";
@@ -395,16 +395,16 @@ namespace SimuRails.UI.ABMFormacion
                     errorMsj += "Cantidad de coches: El valor debe ser positivo.\n";
                 }
                     
-                if (formacionSeleccionada.Formaciones_X_Coches.Where(x => x.Coches.Modelo == cocheSeleccionado.Modelo).Count() != 0)
+                if (formacionSeleccionada.Formacion_X_Coche.Where(x => x.Coche.Modelo == cocheSeleccionado.Modelo).Count() != 0)
                     errorMsj += "El coche ya pertenece a la formación.\n";
 
                 if (string.IsNullOrEmpty(errorMsj))
                 {
-                    Formaciones_X_Coches fc = new Formaciones_X_Coches();
-                    fc.Coches = cocheSeleccionado;
+                    Formacion_X_Coche fc = new Formacion_X_Coche();
+                    fc.Coche = cocheSeleccionado;
                     fc.Id_Coche = cocheSeleccionado.Id;
                     fc.VecesRepetido = Convert.ToInt32(txtCantidadCochesMod.Text);
-                    formacionSeleccionada.Formaciones_X_Coches.Add(fc);
+                    formacionSeleccionada.Formacion_X_Coche.Add(fc);
                     lbxCochesFormacionMod.Items.Add(fc);
                     txtCantidadCochesMod.Text = "";
                     RecalcularTotalesFormacion();
@@ -417,8 +417,8 @@ namespace SimuRails.UI.ABMFormacion
         private void btnEliminarCocheMod_Click(object sender, EventArgs e)
         {
             string errorMsj = "";
-            Formaciones_X_Coches fc = (Formaciones_X_Coches)lbxCochesFormacionMod.SelectedItem;
-            Formaciones formacionSeleccionada = (Formaciones)lbxFormacionesModificar.SelectedItem;
+            Formacion_X_Coche fc = (Formacion_X_Coche)lbxCochesFormacionMod.SelectedItem;
+            Formacion formacionSeleccionada = (Formacion)lbxFormacionesModificar.SelectedItem;
 
             if (fc == null)
                 errorMsj += "No se seleccionó ningún coche para ser eliminado.\n";
@@ -428,10 +428,10 @@ namespace SimuRails.UI.ABMFormacion
             if (string.IsNullOrEmpty(errorMsj))
             {
                 lbxCochesFormacionMod.SelectedIndex = -1;
-                formacionSeleccionada.Formaciones_X_Coches.Remove(fc);
+                formacionSeleccionada.Formacion_X_Coche.Remove(fc);
                 
                 /*Esto se hace asi en caso de que el objeto todavia no haya sido agregado/guadado en el contexto de la bd*/
-                try { context.Formaciones_X_Coches.Remove(fc); }
+                try { context.Formacion_X_Coche.Remove(fc); }
                 catch
                 {
                     
@@ -476,16 +476,16 @@ namespace SimuRails.UI.ABMFormacion
 
         private void lbxFormacionesEliminar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Formaciones f = (Formaciones)lbxFormacionesEliminar.SelectedItem;
+            Formacion f = (Formacion)lbxFormacionesEliminar.SelectedItem;
             
             if (f == null)
                 return;
 
             lbxServiciosAsociadosEliminar.Items.Clear();
-            List<Servicios_X_Formaciones> serviciosFormacionesAsociados = context.Servicios_X_Formaciones.Where(x => x.Id_Formacion == f.Id).ToList<Servicios_X_Formaciones>();
+            List<Servicio_X_Formacion> serviciosFormacionesAsociados = context.Servicio_X_Formacion.Where(x => x.Id_Formacion == f.Id).ToList<Servicio_X_Formacion>();
 
-            foreach (Servicios_X_Formaciones sf in serviciosFormacionesAsociados)
-                lbxServiciosAsociadosEliminar.Items.Add(sf.Servicios);
+            foreach (Servicio_X_Formacion sf in serviciosFormacionesAsociados)
+                lbxServiciosAsociadosEliminar.Items.Add(sf.Servicio);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace SimuRails
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                testDb.Coches.ToList();
+                testDb.Coche.ToList();
             }
             catch
             {

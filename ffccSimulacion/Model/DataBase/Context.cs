@@ -17,21 +17,21 @@ namespace SimuRails.Model.DataBase
 
         //Coches
         
-        public List<Coches> GetAllCoches()
+        public List<Coche> GetAllCoches()
         {
-            return context.Coches.ToList();
+            return context.Coche.ToList();
         }
 
-        public Coches GetCocheById(int id)
+        public Coche GetCocheById(int id)
         {
-            return context.Coches.ToList().Where(x => x.Id == id).First();
+            return context.Coche.ToList().Where(x => x.Id == id).First();
         }
 
-        public int InsertCoche(Coches coche)
+        public int InsertCoche(Coche coche)
         {
             try
             {
-                context.Coches.Add(coche);
+                context.Coche.Add(coche);
                 
                 context.SaveChanges();
             }
@@ -42,14 +42,14 @@ namespace SimuRails.Model.DataBase
                 //return -1;
             }
 
-            return context.Coches.ToList().Find(x => x.Equals(coche)).Id;
+            return context.Coche.ToList().Find(x => x.Equals(coche)).Id;
         }
 
-        public void DeleteCoche(Coches coche)
+        public void DeleteCoche(Coche coche)
         {
             try
             {
-                context.Coches.Remove(coche);
+                context.Coche.Remove(coche);
 
                 context.SaveChanges();
             }

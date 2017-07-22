@@ -73,11 +73,11 @@ namespace SimuRails.UI.ABMCoche
             {
                 try
                 {
-                    Coches nuevoCoche = new Coches();
+                    Coche nuevoCoche = new Coche();
                     nuevoCoche.Modelo = txtModelo.Text;
                     if (rndEsLocomotoraSi.Checked)
                     {
-                        nuevoCoche.EsLocomotora = 1;
+                        nuevoCoche.EsLocomotora = true;
                         nuevoCoche.ConsumoMovimiento = Convert.ToInt32(txtConsumoMov.Text);
                         nuevoCoche.ConsumoParado = Convert.ToInt32(txtConsumoParado.Text);
                         if (cbxTipoConsumo.SelectedItem.ToString() == "Eléctrico")
@@ -87,7 +87,7 @@ namespace SimuRails.UI.ABMCoche
                     }
                     else
                     {
-                        nuevoCoche.EsLocomotora = 0;
+                        nuevoCoche.EsLocomotora = false;
                         nuevoCoche.ConsumoMovimiento = 0;
                         nuevoCoche.TipoConsumo = 0;
                         nuevoCoche.ConsumoParado = 0;
@@ -96,10 +96,8 @@ namespace SimuRails.UI.ABMCoche
                     nuevoCoche.MaximoLegalPasajeros = Convert.ToInt32(txtMaxLegal.Text);
                     nuevoCoche.CapacidadMaximaPasajeros = Convert.ToInt32(txtMaxReal.Text);
 
-                    context.Coches.Add(nuevoCoche);
+                    context.Coche.Add(nuevoCoche);
                     context.SaveChanges();
-                    //lbxCochesBorrar.Items.Add(nuevoCoche);
-                    //lbxCochesModificar.Items.Add(nuevoCoche);
                     LimpiarTabNuevoCoche();
                     cargarCochesEnListas();
                     MessageBox.Show("Coche Guardado.");
@@ -140,12 +138,12 @@ namespace SimuRails.UI.ABMCoche
             {
                 try
                 {
-                    Coches cocheSeleccionado = (Coches)lbxCochesModificar.SelectedItem;
+                    Coche cocheSeleccionado = (Coche)lbxCochesModificar.SelectedItem;
                     cocheSeleccionado.Modelo = txtModeloMod.Text;
 
                     if (rdbLocomotoraSiMod.Checked)
                     {
-                        cocheSeleccionado.EsLocomotora = 1;
+                        cocheSeleccionado.EsLocomotora = true;
                         if (cbxTipoConsumoMod.SelectedItem.ToString() == "Diesel")
                             cocheSeleccionado.TipoConsumo = (int)TipoConsumo.Disel;
                         else
@@ -155,7 +153,7 @@ namespace SimuRails.UI.ABMCoche
                     }
                     else
                     {
-                        cocheSeleccionado.EsLocomotora = 0;
+                        cocheSeleccionado.EsLocomotora = false;
                         cocheSeleccionado.ConsumoMovimiento = 0;
                         cocheSeleccionado.ConsumoParado = 0;
                         cocheSeleccionado.TipoConsumo = 0;
@@ -253,8 +251,8 @@ namespace SimuRails.UI.ABMCoche
             lbxCochesModificar.Items.Clear();
             lstCocheCrear.Items.Clear();
 
-            List<Coches> listaCoches = context.Coches.ToList<Coches>();
-            foreach(Coches c in listaCoches)
+            List<Coche> listaCoches = context.Coche.ToList<Coche>();
+            foreach(Coche c in listaCoches)
             {
                 lbxCochesBorrar.Items.Add(c);
                 lbxCochesModificar.Items.Add(c);
@@ -270,12 +268,12 @@ namespace SimuRails.UI.ABMCoche
         {
             string errormsj = "";
 
-            Coches unCoche = (Coches)lbxCochesBorrar.SelectedItem;
+            Coche unCoche = (Coche)lbxCochesBorrar.SelectedItem;
             if (lbxCochesBorrar.SelectedIndex < 0)
             {
                 errormsj += "No se ha seleccionado ningun coche para eliminar\n";
             }
-            else if (context.Formaciones_X_Coches.Where(x => x.Id_Coche == unCoche.Id).Count() != 0)
+            else if (context.Formacion_X_Coche.Where(x => x.Id_Coche == unCoche.Id).Count() != 0)
             {
                 errormsj += "El coche no puede borrarse porque pertenece a una o mas formaciones\n";
             }
@@ -286,7 +284,7 @@ namespace SimuRails.UI.ABMCoche
                     if (MessageBox.Show("El coche se eliminará de manera permanente.¿Desea continuar?", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
                     /*Se verifica que el coche no pertenezca a ninguna formacion antes de borrarlo*/
-                    context.Coches.Remove(unCoche);
+                    context.Coche.Remove(unCoche);
                     context.SaveChanges();
                     //lbxCochesBorrar.Items.Remove(unCoche);
                     //lbxCochesModificar.Items.Remove(unCoche);
@@ -309,9 +307,9 @@ namespace SimuRails.UI.ABMCoche
             if (lbxCochesModificar.SelectedIndex > -1)
             {
                 habilitarModificar();
-                Coches unCoche = (Coches)lbxCochesModificar.SelectedItem;
+                Coche unCoche = (Coche)lbxCochesModificar.SelectedItem;
                 txtModeloMod.Text = unCoche.Modelo;
-                if (unCoche.EsLocomotora == 1)
+                if (unCoche.EsLocomotora == true)
                 {
                     rdbLocomotoraSiMod.Checked = true;
 
@@ -434,7 +432,7 @@ namespace SimuRails.UI.ABMCoche
             if (!string.IsNullOrEmpty(buscarCoche.Text) && Util.EsAlfaNumerico(buscarCoche.Text))
             {
                 resultados.Items.Clear();
-                context.Coches.Where(x => x.Modelo.Contains(buscarCoche.Text)).ToList().ForEach(y => resultados.Items.Add(y));
+                context.Coche.Where(x => x.Modelo.Contains(buscarCoche.Text)).ToList().ForEach(y => resultados.Items.Add(y));
             }
             else
             {
@@ -447,12 +445,12 @@ namespace SimuRails.UI.ABMCoche
         {
             if(lbxCochesBorrar.SelectedIndex > -1)
             {
-                Formaciones f;
+                Formacion f;
                 lstCocheEliFormaciones.Items.Clear();
-                List<Formaciones_X_Coches> fc = context.Formaciones_X_Coches.Where(x => x.Id_Coche == ((Coches)lbxCochesBorrar.SelectedItem).Id).ToList<Formaciones_X_Coches>();
+                List<Formacion_X_Coche> fc = context.Formacion_X_Coche.Where(x => x.Id_Coche == ((Coche)lbxCochesBorrar.SelectedItem).Id).ToList<Formacion_X_Coche>();
                 foreach(var item in fc)
                 {
-                    f = context.Formaciones.Where(x => x.Id == item.Id_Formacion).FirstOrDefault();
+                    f = context.Formacion.Where(x => x.Id == item.Id_Formacion).FirstOrDefault();
                     lstCocheEliFormaciones.Items.Add(f);
                 }
             }

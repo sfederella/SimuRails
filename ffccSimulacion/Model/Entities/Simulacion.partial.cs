@@ -1,17 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using SimuRails.Model.Simulacion;
+using SimuRails.UI.ABMSimulacion;
+
 namespace SimuRails.Model.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Windows.Forms;
-    using Simulacion;
-    using UI.ABMSimulacion;
-
-    public partial class Simulaciones
+    public partial class Simulacion
     {
         //private List<ResultadoFormacion> _resultadosFormacionesSimulacion;
         private List<ResultadoServicio> _resultadosServiciosSimulacion;
 
-        public Simulaciones(){}
+        public Simulacion(){}
 
         public int _estrategiaDeSimulacion { get; set; }
 
@@ -22,7 +22,7 @@ namespace SimuRails.Model.Entities
          correr la simulacion propiamente dicha*/
         public void ConfigurarSimulador()
         {
-            Trazas.ConfigurarLosServiciosDeLaTraza(Tiempo_Final);
+            Traza.ConfigurarLosServiciosDeLaTraza(TiempoFinal);
             _estrategiaDeSimulacion = 0;
         }
 
@@ -30,9 +30,9 @@ namespace SimuRails.Model.Entities
         {
             /*Esta validaciones son necesarias porque antes de ejecutar el algoritmo de simulacion es necesario configurar el entorno*/
             string errorMsj = "";
-            if (this.Trazas == null)
+            if (this.Traza == null)
                 errorMsj += "El simulador no tiene una traza asignada.\n";
-            if (this.Tiempo_Final == 0)
+            if (this.TiempoFinal == 0)
                 errorMsj += "No hay asignado ningún tiempo de simulación.\n";
 
             if(string.IsNullOrEmpty(errorMsj))
@@ -56,7 +56,7 @@ namespace SimuRails.Model.Entities
             switch (_estrategiaDeSimulacion)
             {
                 case(0):
-                    TiempoComprometido tiempoComprometido = new TiempoComprometido(0, Tiempo_Final, Trazas, BarraProgreso);
+                    TiempoComprometido tiempoComprometido = new TiempoComprometido(0, TiempoFinal, Traza, BarraProgreso);
                     tiempoComprometido.EjecutarSimulacion();
                     //_resultadosFormacionesSimulacion = tiempoComprometido.ResultadosFormaciones;
                     _resultadosServiciosSimulacion = tiempoComprometido.ResultadosServicios;

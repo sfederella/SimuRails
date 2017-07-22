@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2ffbd6bdc2aa43c98f273cefc52fe603" Name="Diagram1">
+      <Diagram DiagramId="c57a3f077440442cbc2068b7095192c3" Name="Diagram1">
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Coche" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Estacion" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Estacion_X_Incidente" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Formacion" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Formacion_X_Coche" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Incidente" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimuRails.Model.Entities.Servicio" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimuRails.Model.Entities.Servicio" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Servicio_X_Formacion" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Simulacion" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SimuRails.Model.Entities.Tramo" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />

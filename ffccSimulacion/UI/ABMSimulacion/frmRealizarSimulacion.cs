@@ -14,7 +14,7 @@ namespace SimuRails.UI.ABMSimulacion
 
         SimuRailsEntities context;
 
-        private Simulaciones simulacion;
+        private Simulacion simulacion;
 
         public ResultadoSimulacion resultadoSimulacion;
 
@@ -44,7 +44,7 @@ namespace SimuRails.UI.ABMSimulacion
                 if (result == DialogResult.OK)
                 {
                     //simulacion = frmBuscar.simulacionSeleccionada;
-                    simulacion = context.Simulaciones.Where(x => x.Id == frmBuscar.simulacionSeleccionada.Id).FirstOrDefault();
+                    simulacion = context.Simulacion.Where(x => x.Id == frmBuscar.simulacionSeleccionada.Id).FirstOrDefault();
                     cargarCamposSimulacion();
 
 //                    this.btnSimGuardar.Enabled = false;
@@ -69,16 +69,16 @@ namespace SimuRails.UI.ABMSimulacion
         {
             tbSimNombre.Text = simulacion.Nombre;
 
-            tbSimDuracion.Text = simulacion.Tiempo_Final.ToString();
+            tbSimDuracion.Text = simulacion.TiempoFinal.ToString();
 
             lBoxSimTrazas.Items.Clear();
 
-            lBoxSimTrazas.Items.Add(simulacion.Trazas);
+            lBoxSimTrazas.Items.Add(simulacion.Traza);
 
             lBoxSimServicios.Items.Clear();
 
-            foreach (Trazas_X_Servicios ts in context.Trazas_X_Servicios.Where(x => x.Id_Traza == simulacion.Id_Traza))
-                lBoxSimServicios.Items.Add(ts.Servicios);
+            foreach (Traza_X_Servicio ts in context.Traza_X_Servicio.Where(x => x.Id_Traza == simulacion.Id_Traza))
+                lBoxSimServicios.Items.Add(ts.Servicio);
 
             lBoxSimTrazas.SelectedIndex = 0;
 
@@ -93,7 +93,7 @@ namespace SimuRails.UI.ABMSimulacion
         private void btnSimular_Click(object sender, EventArgs e)
         {
             string errorMsj = "";
-            Trazas trazaSeleccionada = (Trazas)lBoxSimTrazas.SelectedItem;
+            Traza trazaSeleccionada = (Traza)lBoxSimTrazas.SelectedItem;
             if (!Util.EsAlfaNumerico(tbSimNombre.Text))
                 errorMsj += "Nombre: incompleto o incorrecto.\n";
             if (!Util.EsNumerico(tbSimDuracion.Text))
@@ -105,9 +105,9 @@ namespace SimuRails.UI.ABMSimulacion
 
             if (string.IsNullOrEmpty(errorMsj))
             {
-                simulacion = new Simulaciones();
-                simulacion.Trazas = trazaSeleccionada;
-                simulacion.Tiempo_Final = Convert.ToInt32(tbSimDuracion.Text) * 60; //Paso la duracion de la simulacion a minutos
+                simulacion = new Simulacion();
+                simulacion.Traza = trazaSeleccionada;
+                simulacion.TiempoFinal = Convert.ToInt32(tbSimDuracion.Text) * 60; //Paso la duracion de la simulacion a minutos
 
                 Thread threadSimulacion = new Thread(new ThreadStart(simulacion.EjecutarSimulacion)); // creo el hilo de la simulacion
                 frmBarraProgreso barra = new frmBarraProgreso(threadSimulacion); //creo la barra de progreso
@@ -154,17 +154,17 @@ namespace SimuRails.UI.ABMSimulacion
                 {   /*si la simulacion es null o su id es igual a 0 quiere decir que la misma no existe en la bd*/
                     if (simulacion == null || simulacion.Id == 0)
                     {
-                        simulacion = new Simulaciones();
+                        simulacion = new Simulacion();
 
                         simulacion.Nombre = tbSimNombre.Text;
 
-                        simulacion.Tiempo_Final = Convert.ToInt32(tbSimDuracion.Text);
+                        simulacion.TiempoFinal = Convert.ToInt32(tbSimDuracion.Text);
 
-                        simulacion.Trazas = (Trazas)lBoxSimTrazas.SelectedItem;
+                        simulacion.Traza = (Traza)lBoxSimTrazas.SelectedItem;
 
                         //TODO cargar servicios
 
-                        context.Simulaciones.Add(simulacion);
+                        context.Simulacion.Add(simulacion);
                     }
                     else
                     {
@@ -173,9 +173,9 @@ namespace SimuRails.UI.ABMSimulacion
 
                         simulacion.Nombre = tbSimNombre.Text;
 
-                        simulacion.Tiempo_Final = Convert.ToInt32(tbSimDuracion.Text);
+                        simulacion.TiempoFinal = Convert.ToInt32(tbSimDuracion.Text);
 
-                        simulacion.Trazas = (Trazas)lBoxSimTrazas.SelectedItem;
+                        simulacion.Traza = (Traza)lBoxSimTrazas.SelectedItem;
                     }
 
                     context.SaveChanges();
@@ -197,35 +197,28 @@ namespace SimuRails.UI.ABMSimulacion
         {
             lBoxSimTrazas.Items.Clear();
 
-            context.Trazas.ToList().ForEach(x => { lBoxSimTrazas.Items.Add(x); });
+            context.Traza.ToList().ForEach(x => { lBoxSimTrazas.Items.Add(x); });
         }
-
-        /*private void buscarServiciosDisponibles()
-        {
-            lBoxSimServicios.Items.Clear();
-
-            context.Servicios.ToList().ForEach(x => { lBoxSimServicios.Items.Add(x); });
-        }*/
 
         private void lBoxSimTrazas_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lBoxSimTrazas.SelectedIndex > -1)
             {
-                Servicios s;
+                Servicio s;
                 lBoxSimServicios.Items.Clear();
                 lbxFormaciones.Items.Clear();
 
-                Trazas trazaSeleccionada = (Trazas)lBoxSimTrazas.SelectedItem;
+                Traza trazaSeleccionada = (Traza)lBoxSimTrazas.SelectedItem;
 
-                foreach (Trazas_X_Servicios ts in context.Trazas_X_Servicios.Where(x => x.Id_Traza == trazaSeleccionada.Id))
+                foreach (Traza_X_Servicio ts in context.Traza_X_Servicio.Where(x => x.Id_Traza == trazaSeleccionada.Id))
                 {
-                    s = ts.Servicios;
+                    s = ts.Servicio;
                     lBoxSimServicios.Items.Add(s);
 
-                    foreach (Servicios_X_Formaciones sf in context.Servicios_X_Formaciones.Where(x => x.Id_Servicio == s.Id))
+                    foreach (Servicio_X_Formacion sf in context.Servicio_X_Formacion.Where(x => x.Id_Servicio == s.Id))
                     {
-                        if (!lbxFormaciones.Items.Contains(sf.Formaciones))
-                            lbxFormaciones.Items.Add(sf.Formaciones);
+                        if (!lbxFormaciones.Items.Contains(sf.Formacion))
+                            lbxFormaciones.Items.Add(sf.Formacion);
                     }
                 }
 
@@ -279,7 +272,7 @@ namespace SimuRails.UI.ABMSimulacion
             resultadoSimulacion.consumoElectricoPasajero = 0;
             resultadoSimulacion.consumoDieselPasajero = 0;
             resultadoSimulacion.tiempoTotal = 0;
-            resultadoSimulacion.tiempoSimulado = simulacion.Tiempo_Final - simulacion.Tiempo_Inicial;
+            resultadoSimulacion.tiempoSimulado = simulacion.TiempoFinal - simulacion.TiempoInicial;
 
             //foreach (ResultadoFormacion resultadoFormacion in simulacion.ResultadosFormacionesSimulacion)
             foreach (ResultadoServicio resultServ in simulacion.ResultadosServiciosSimulacion)
@@ -321,7 +314,7 @@ namespace SimuRails.UI.ABMSimulacion
 
             resultadoSimulacion.nombreSimulacion = tbSimNombre.Text;
 
-            resultadoSimulacion.idTraza = ((Trazas)lBoxSimTrazas.SelectedItem).Id;
+            resultadoSimulacion.idTraza = ((Traza)lBoxSimTrazas.SelectedItem).Id;
 
             resultadoSimulacion.resultadosServicios = simulacion.ResultadosServiciosSimulacion;
 

@@ -3,7 +3,7 @@ namespace SimuRails.Model.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Incidentes
+    public partial class Incidente
     {
         public bool Ocurre()
         {

@@ -1,8 +1,8 @@
+using SimuRails.Model.Simulacion;
+
 namespace SimuRails.Model.Entities
 {
-    using Simulacion;
-
-    public partial class Coches
+    public partial class Coche
     {
         private int _pasajerosSentados = 0;
         private int _pasajerosParados = 0;
@@ -35,9 +35,9 @@ namespace SimuRails.Model.Entities
             return CapacidadMaximaPasajeros - _pasajerosSentados - _pasajerosParados;
         }
 
-        public Coches ClonarCoche()
+        public Coche ClonarCoche()
         {
-            return (Coches)this.MemberwiseClone(); ;
+            return (Coche)this.MemberwiseClone(); ;
         }
 
         public int recibir(int pasajerosASubir)

@@ -60,30 +60,30 @@ namespace SimuRails.Model.Simulacion
 
             SimuRailsEntities context = new SimuRailsEntities();
 
-            escenarioStr = context.Trazas.Where(x => x.Id == idTraza).FirstOrDefault().Nombre;
+            escenarioStr = context.Traza.Where(x => x.Id == idTraza).FirstOrDefault().Nombre;
             doc.Add(new Paragraph("Escenario de Simulación\n", FontFactory.GetFont("ARIAL", 13, iTextSharp.text.Font.BOLD)));
             doc.Add(new Paragraph("Traza", FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.BOLD)));
             doc.Add(new Paragraph(escenarioStr, FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.ITALIC)));
-            Servicios unServicio;
-            Formaciones unaFormacion;
-            Estaciones unaEstacion;
+            Servicio unServicio;
+            Formacion unaFormacion;
+            Estacion unaEstacion;
             escenarioStr = "";
             //doc.Add(new Paragraph("                     -----------"));
-            foreach (var ts in context.Trazas_X_Servicios.Where(x => x.Id_Traza == idTraza))
+            foreach (var ts in context.Traza_X_Servicio.Where(x => x.Id_Traza == idTraza))
             {
                 doc.Add(new Paragraph("Servicios", FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.BOLD)));
-                unServicio = context.Servicios.Where(y => y.Id == ts.Id_Servicio).FirstOrDefault();
+                unServicio = context.Servicio.Where(y => y.Id == ts.Id_Servicio).FirstOrDefault();
                 doc.Add(new Paragraph(unServicio.Nombre, FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.ITALIC)));
                 doc.Add(new Paragraph("Formación ", FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.BOLD)));
-                foreach (var sf in context.Servicios_X_Formaciones.Where(x => x.Id_Servicio == unServicio.Id))
+                foreach (var sf in context.Servicio_X_Formacion.Where(x => x.Id_Servicio == unServicio.Id))
                 {
-                    unaFormacion = context.Formaciones.Where(y => y.Id == sf.Id_Formacion).FirstOrDefault();
-                    doc.Add(new Paragraph(unaFormacion.NombreFormacion, FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.ITALIC)));
+                    unaFormacion = context.Formacion.Where(y => y.Id == sf.Id_Formacion).FirstOrDefault();
+                    doc.Add(new Paragraph(unaFormacion.Nombre, FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.ITALIC)));
                     doc.Add(new Paragraph("Coches", FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.BOLD)));
                     escenarioStr = "";
-                    foreach (var fc in context.Formaciones_X_Coches.Where(x => x.Id_Formacion == unaFormacion.Id))
+                    foreach (var fc in context.Formacion_X_Coche.Where(x => x.Id_Formacion == unaFormacion.Id))
                     {
-                        escenarioStr += context.Coches.Where(y => y.Id == fc.Id_Coche).FirstOrDefault().Modelo + ", ";
+                        escenarioStr += context.Coche.Where(y => y.Id == fc.Id_Coche).FirstOrDefault().Modelo + ", ";
                     }
                     escenarioStr = escenarioStr.TrimEnd(charToTrim);
                 }
@@ -94,16 +94,16 @@ namespace SimuRails.Model.Simulacion
 
                 doc.Add(new Paragraph("Estaciones", FontFactory.GetFont("ARIAL", 10, iTextSharp.text.Font.BOLD)));
                 escenarioStr = "";
-                foreach (var r in context.Relaciones.Where(y => y.Id_Servicio == ts.Id_Servicio))
+                foreach (var r in context.Tramo.Where(y => y.Id_Servicio == ts.Id_Servicio))
                 {
-                    unaEstacion = context.Estaciones.Where(y => y.Id == r.Id_Estacion_Anterior).FirstOrDefault();
+                    unaEstacion = context.Estacion.Where(y => y.Id == r.Id_Estacion_Anterior).FirstOrDefault();
                     escenarioStr += unaEstacion.Nombre;
-                    if (context.Estaciones_X_Incidentes.Any(x => x.Id_Estacion == unaEstacion.Id))
+                    if (context.Estacion_X_Incidente.Any(x => x.Id_Estacion == unaEstacion.Id))
                     {
                         escenarioStr += " (";
-                        foreach (var ei in context.Estaciones_X_Incidentes.Where(x => x.Id_Estacion == unaEstacion.Id))
+                        foreach (var ei in context.Estacion_X_Incidente.Where(x => x.Id_Estacion == unaEstacion.Id))
                         {
-                            escenarioStr += context.Incidentes.Where(y => y.Id == ei.Id_Incidente).FirstOrDefault().Nombre + ", ";
+                            escenarioStr += context.Incidente.Where(y => y.Id == ei.Id_Incidente).FirstOrDefault().Nombre + ", ";
                         }
                         escenarioStr = escenarioStr.TrimEnd(charToTrim);
                         escenarioStr += ") ";

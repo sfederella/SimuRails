@@ -739,7 +739,7 @@
             // 
             // lbxFormacionesModificar
             // 
-            this.lbxFormacionesModificar.DisplayMember = "NombreFormacion";
+            this.lbxFormacionesModificar.DisplayMember = "Nombre";
             this.lbxFormacionesModificar.FormattingEnabled = true;
             this.lbxFormacionesModificar.ItemHeight = 15;
             this.lbxFormacionesModificar.Location = new System.Drawing.Point(17, 71);

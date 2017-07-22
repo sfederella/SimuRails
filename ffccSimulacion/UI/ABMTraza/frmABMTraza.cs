@@ -11,7 +11,7 @@ namespace SimuRails.UI.ABMTraza
     {
         SimuRailsEntities context;
 
-        Trazas trazaSeleccionada;
+        Traza trazaSeleccionada;
 
         public frmABMTraza()
         {
@@ -113,16 +113,16 @@ namespace SimuRails.UI.ABMTraza
             {
                 try
                 {
-                    Trazas nuevaTraza = new Trazas();
+                    Traza nuevaTraza = new Traza();
 
                     nuevaTraza.Nombre = txtTraCreNombre.Text;
 
-                    foreach (Servicios s in clbTraCreServicios.CheckedItems)
+                    foreach (Servicio s in clbTraCreServicios.CheckedItems)
                     {
                         nuevaTraza.AgregarServicio(s);
                     }
 
-                    context.Trazas.Add(nuevaTraza);
+                    context.Traza.Add(nuevaTraza);
 
                     context.SaveChanges();
 
@@ -164,15 +164,15 @@ namespace SimuRails.UI.ABMTraza
             {
                 try
                 {
-                    trazaSeleccionada = (Trazas)lstTraModTrazas.SelectedItem;
+                    trazaSeleccionada = (Traza)lstTraModTrazas.SelectedItem;
 
                     trazaSeleccionada.Nombre = txtTraModNombre.Text;
 
                     //borro las relaciones existentes en la base de datos
-                    context.Trazas_X_Servicios.Where(x => x.Id_Traza == trazaSeleccionada.Id).ToList().ForEach(y => context.Trazas_X_Servicios.Remove(y));
+                    context.Traza_X_Servicio.Where(x => x.Id_Traza == trazaSeleccionada.Id).ToList().ForEach(y => context.Traza_X_Servicio.Remove(y));
 
                     //agrego la configuracion del checklistbox
-                    foreach (Servicios s in clbTraModServicios.CheckedItems)
+                    foreach (Servicio s in clbTraModServicios.CheckedItems)
                     {
                         trazaSeleccionada.AgregarServicio(s);
                     }
@@ -204,13 +204,13 @@ namespace SimuRails.UI.ABMTraza
         private void eliminarTraza()
         {
             string errorMsj = "";
-            trazaSeleccionada = (Trazas)lstTraEliTrazas.SelectedItem;
+            trazaSeleccionada = (Traza)lstTraEliTrazas.SelectedItem;
 
             if (lstTraEliTrazas.SelectedItem == null)
             {
                 errorMsj += "No se ha seleccionado ninguna traza para eliminar.\n";
             }
-            else if(context.Simulaciones.Any(x => x.Id_Traza == trazaSeleccionada.Id))
+            else if(context.Simulacion.Any(x => x.Id_Traza == trazaSeleccionada.Id))
             {
                 errorMsj += "La traza no puede eliminarse porque pertenece a una simulación.\n";
             }
@@ -221,12 +221,12 @@ namespace SimuRails.UI.ABMTraza
                 {
                     if (MessageBox.Show("La traza se eliminará de manera permanente. ¿Desea continuar?", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
-                    trazaSeleccionada = (Trazas)lstTraEliTrazas.SelectedItem;
+                    trazaSeleccionada = (Traza)lstTraEliTrazas.SelectedItem;
 
                     //borro todos los servicios asignados a la traza
-                    context.Trazas_X_Servicios.Where(x => x.Id_Traza == trazaSeleccionada.Id).ToList().ForEach(y => context.Trazas_X_Servicios.Remove(y));
+                    context.Traza_X_Servicio.Where(x => x.Id_Traza == trazaSeleccionada.Id).ToList().ForEach(y => context.Traza_X_Servicio.Remove(y));
 
-                    context.Trazas.Remove(trazaSeleccionada);
+                    context.Traza.Remove(trazaSeleccionada);
 
                     context.SaveChanges();
 
@@ -264,7 +264,7 @@ namespace SimuRails.UI.ABMTraza
 
             clbTraModServicios.Items.Clear();
 
-            context.Servicios.ToList().ForEach(x => { clbTraCreServicios.Items.Add(x); clbTraModServicios.Items.Add(x); });
+            context.Servicio.ToList().ForEach(x => { clbTraCreServicios.Items.Add(x); clbTraModServicios.Items.Add(x); });
         }
 
         private void cargarTrazas()
@@ -275,7 +275,7 @@ namespace SimuRails.UI.ABMTraza
 
             lstTraCreResultados.Items.Clear();
 
-            context.Trazas.ToList().ForEach(x => { lstTraModTrazas.Items.Add(x); lstTraEliTrazas.Items.Add(x); lstTraCreResultados.Items.Add(x); });
+            context.Traza.ToList().ForEach(x => { lstTraModTrazas.Items.Add(x); lstTraEliTrazas.Items.Add(x); lstTraCreResultados.Items.Add(x); });
         }
 
         #endregion
@@ -291,7 +291,7 @@ namespace SimuRails.UI.ABMTraza
             {
                 habilitarModificar();
 
-                trazaSeleccionada = (Trazas)lstTraModTrazas.SelectedItem;
+                trazaSeleccionada = (Traza)lstTraModTrazas.SelectedItem;
 
                 txtTraModNombre.Text = trazaSeleccionada.Nombre;
 
@@ -300,7 +300,7 @@ namespace SimuRails.UI.ABMTraza
                     clbTraModServicios.SetItemChecked(i, false);
                 }
 
-                foreach (Servicios s in trazaSeleccionada.ServiciosDisponibles)
+                foreach (Servicio s in trazaSeleccionada.ServiciosDisponibles)
                 {
                     clbTraModServicios.SetItemChecked(clbTraModServicios.Items.IndexOf(s), true);
                 }
@@ -365,7 +365,7 @@ namespace SimuRails.UI.ABMTraza
             if (!String.IsNullOrEmpty(buscarTraza.Text) && Util.EsAlfaNumerico(buscarTraza.Text))
             {
                 resultados.Items.Clear();
-                context.Trazas.Where(x => x.Nombre.Contains(buscarTraza.Text)).ToList().ForEach(y => resultados.Items.Add(y));
+                context.Traza.Where(x => x.Nombre.Contains(buscarTraza.Text)).ToList().ForEach(y => resultados.Items.Add(y));
             }
             else
             {
@@ -409,7 +409,7 @@ namespace SimuRails.UI.ABMTraza
             if (lstTraEliTrazas.SelectedIndex > -1)
             {
                 lstTraEliSimulaciones.Items.Clear();
-                context.Simulaciones.Where(x => x.Id_Traza == ((Trazas)lstTraEliTrazas.SelectedItem).Id).ToList().ForEach(y => lstTraEliSimulaciones.Items.Add(y));
+                context.Simulacion.Where(x => x.Id_Traza == ((Traza)lstTraEliTrazas.SelectedItem).Id).ToList().ForEach(y => lstTraEliSimulaciones.Items.Add(y));
             }
         }
 

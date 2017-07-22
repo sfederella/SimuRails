@@ -136,7 +136,7 @@
             // 
             // lbxFormaciones
             // 
-            this.lbxFormaciones.DisplayMember = "NombreFormacion";
+            this.lbxFormaciones.DisplayMember = "Nombre";
             this.lbxFormaciones.Enabled = false;
             this.lbxFormaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxFormaciones.FormattingEnabled = true;

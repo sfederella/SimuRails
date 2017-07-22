@@ -16,7 +16,7 @@ namespace SimuRails.UI.ABMIncidente
     {
         SimuRailsEntities context;
 
-        Incidentes incidenteSeleccionado;
+        Incidente incidenteSeleccionado;
 
         public frmABMIncidente()
         {
@@ -89,7 +89,7 @@ namespace SimuRails.UI.ABMIncidente
 
             lstIncEli.Items.Clear();
 
-            context.Incidentes.ToList().ForEach(x => { lstIncMod.Items.Add(x); lstIncEli.Items.Add(x); lstIncidenteCrear.Items.Add(x); });
+            context.Incidente.ToList().ForEach(x => { lstIncMod.Items.Add(x); lstIncEli.Items.Add(x); lstIncidenteCrear.Items.Add(x); });
         }
 
         #endregion
@@ -106,7 +106,7 @@ namespace SimuRails.UI.ABMIncidente
             {
                 errorMsj += "Nombre: Incompleto ó Incorrecto.\n";
             }
-            else if (context.Incidentes.Any(x => x.Nombre == txtIncCreNom.Text))
+            else if (context.Incidente.Any(x => x.Nombre == txtIncCreNom.Text))
             {
                 errorMsj += "El Incidente existe en el Sistema, ingrese otro.\n";
             }
@@ -130,7 +130,7 @@ namespace SimuRails.UI.ABMIncidente
             {
                 try
                 {
-                    context.Incidentes.Add(new Incidentes
+                    context.Incidente.Add(new Incidente
                     {
                         Nombre = txtIncCreNom.Text,
                         Descripcion = txtincCreDes.Text,
@@ -172,7 +172,7 @@ namespace SimuRails.UI.ABMIncidente
             {
                 errorMsj += "Nombre: Incompleto ó Incorrecto.\n";
             }
-            else if (context.Incidentes.Where(x => x.Nombre == txtModNombre.Text).Count() > 1)
+            else if (context.Incidente.Where(x => x.Nombre == txtModNombre.Text).Count() > 1)
             {
                 errorMsj += "El Incidente existe en el Sistema, ingrese otro.\n";
             }
@@ -240,13 +240,13 @@ namespace SimuRails.UI.ABMIncidente
         private void borrarIncidente()
         {
             string errorMsj = "";
-            incidenteSeleccionado = (Incidentes) lstIncEli.SelectedItem;
+            incidenteSeleccionado = (Incidente) lstIncEli.SelectedItem;
 
             if (lstIncEli.SelectedItem == null)
             {
                 errorMsj += "No se ha seleccionado ningun incidente para eliminar.\n";
             }
-            else if (context.Estaciones_X_Incidentes.Any(x => x.Id_Incidente == incidenteSeleccionado.Id))
+            else if (context.Estacion_X_Incidente.Any(x => x.Id_Incidente == incidenteSeleccionado.Id))
             {
                 errorMsj += "El incidente no puede eliminarse porque pertenece a una estación.\n";
             }
@@ -257,9 +257,9 @@ namespace SimuRails.UI.ABMIncidente
                 {
                     if (MessageBox.Show("El incidente se eliminará de manera permanente. ¿Desea continuar?", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
-                    incidenteSeleccionado = (Incidentes)lstIncEli.SelectedItem;
+                    incidenteSeleccionado = (Incidente)lstIncEli.SelectedItem;
 
-                    context.Incidentes.Remove(incidenteSeleccionado);
+                    context.Incidente.Remove(incidenteSeleccionado);
 
                     context.SaveChanges();
 
@@ -297,7 +297,7 @@ namespace SimuRails.UI.ABMIncidente
             {
                 habilitarModificar();
 
-                incidenteSeleccionado = (Incidentes)lstIncMod.SelectedItem;
+                incidenteSeleccionado = (Incidente)lstIncMod.SelectedItem;
 
                 txtModNombre.Text = incidenteSeleccionado.Nombre;
 
@@ -398,7 +398,7 @@ namespace SimuRails.UI.ABMIncidente
             if (!String.IsNullOrEmpty(txtBuscar.Text) && Util.EsAlfaNumerico(txtBuscar.Text))
             {
                 resultado.Items.Clear();
-                context.Incidentes.Where(x => x.Nombre.Contains(txtBuscar.Text)).ToList().ForEach(y => resultado.Items.Add(y));
+                context.Incidente.Where(x => x.Nombre.Contains(txtBuscar.Text)).ToList().ForEach(y => resultado.Items.Add(y));
             }
             else
             {
@@ -412,10 +412,10 @@ namespace SimuRails.UI.ABMIncidente
             if(lstIncEli.SelectedIndex > -1)
             {
                 lstIncEliEstaciones.Items.Clear();
-                List<Estaciones_X_Incidentes> ei = context.Estaciones_X_Incidentes.Where(x => x.Id_Incidente == ((Incidentes)lstIncEli.SelectedItem).Id).ToList();
+                List<Estacion_X_Incidente> ei = context.Estacion_X_Incidente.Where(x => x.Id_Incidente == ((Incidente)lstIncEli.SelectedItem).Id).ToList();
                 foreach (var est in ei)
                 {
-                    lstIncEliEstaciones.Items.Add(context.Estaciones.Where(x => x.Id == est.Id_Estacion).FirstOrDefault());
+                    lstIncEliEstaciones.Items.Add(context.Estacion.Where(x => x.Id == est.Id_Estacion).FirstOrDefault());
                 }
             }
         }
