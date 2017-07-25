@@ -19,7 +19,6 @@ namespace SimuRails.Model.Entities
         public int Id_Estacion_Siguiente { get; set; }
         public int Id_Servicio { get; set; }
         public int Distancia { get; set; }
-        public int VelocidadPromedio { get; set; }
         public int TiempoViaje { get; set; }
         public bool EstSigEsParada { get; set; }
     
