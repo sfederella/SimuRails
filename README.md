@@ -2,10 +2,12 @@
 
 # Instalación
 
-Instalar Visual Studio 2015 (2017 también funciona)
-Instalar SQL Server 2012 (instancia SQLSERVER2012) 
-Ejecutar script /SimuRails/db/SimuRails_DB.script.sql
-Compilar, ejecutar localizado en \SimuRails\Desarrollo\bin\Debug\SimuRails.exe
+
+1. Instalar Visual Studio 2015 (2017 también funciona)
+2. Instalar SQL Server 2012 (instancia SQLSERVER2012) 
+3. Ejecutar script /SimuRails/db/SimuRails_DB.script.sql
+4. Copiar la carpeta /SimuRails/Resources en /SimuRails/Desarrollo/bin/Debug
+5. Compilar, ejecutar localizado en \SimuRails\Desarrollo\bin\Debug\SimuRails.exe
 
 # Notas a desarrollar:
 
