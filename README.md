@@ -1,5 +1,13 @@
 # SimuRails
 
+# Instalación
+
+Instalar Visual Studio 2015 (2017 también funciona)
+Instalar SQL Server 2012 (instancia SQLSERVER2012) 
+Ejecutar script /SimuRails/db/SimuRails_DB.script.sql
+Compilar, ejecutar localizado en \SimuRails\Desarrollo\bin\Debug\SimuRails.exe
+
+# Notas a desarrollar:
 
 Algoritmo de ejecución de Tiempo comprometido:
 
